@@ -29,7 +29,7 @@ config = {
     }
   },
   func: {
-    display: false,
+    display: true,
     time: {
       show: true,
       date: false

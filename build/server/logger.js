@@ -1,6 +1,4 @@
-var Logger, _, config;
-
-_ = require('underscore');
+var Logger, config;
 
 config = {};
 

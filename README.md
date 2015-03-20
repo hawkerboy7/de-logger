@@ -41,18 +41,52 @@ First agument should be the name of your choosing for the data you want to log. 
 
 ### Example
 ```javascript
-data = {a:1,b:2,c:3};
 
-log.event('My Event Name', data);
+var data, data2, log;
+
+log = require('../server/app');
+
+data = {
+  a: 1,
+  b: 2,
+  c: 3
+};
+
+data2 = {
+  a: 4,
+  b: 5,
+  c: 6
+};
+
+log.clear();
+
+log.func('First function');
+
+log.info('Log info', data);
+
+log.event('Log event', data2);
+
+log.warn('Cannot find a user id');
+
+log.error('Connection with mongodb couldn\t be established');
+
 ```
-```javascript
-=> info:	My Event Name	{a:1,b:2,c:3}
+Output
+```
+func:	First function
+info:	Webserver	{ a: 1, b: 2, c: 3 }
+event:	Gui input	{ a: 4, b: 5, c: 6 }
+warn:	Usermodel	Cannot find a user id
+error:	Mongodb	Connection with mongodb couldn't be established
 
 ```
 
 But you can also simply use it like this
 ```javascript
+log.info(data);
 log.event(data);
 ```
-```javascript
-=> info:	{a:1,b:2,c:3}
+Output
+```
+info:	{a:1,b:2,c:3}
+event:	{a:1,b:2,c:3}
