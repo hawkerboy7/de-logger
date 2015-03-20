@@ -1,10 +1,17 @@
 {
   "name": "de-logger",
-  "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Logger module for projects",
   "main": "build/server/app.js",
   "devDependencies": {
     "id-builder": "^1.6.0"
+  },
+  "bugs": {
+    "url": "https://github.com/hawkerboy7/logger/issues",
+    "email" : "dexter.esajas@gmail.com"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/hawkerboy7/logger"
   }
 }
