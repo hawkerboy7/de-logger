@@ -6,16 +6,19 @@ Allows you to log events in your project during development and during productio
 
 Install de-logger using npm install
 ```javascript
-	$ npm install de-logger --save
+$ npm install de-logger --save
 ```
 
 Require de-logger in your project
 ```javascript
-	var log = require('de-logger');
+var log = require('de-logger');
 ```
 
 ## API
 ### Methodes
+
+#### clear
+Clear the console (this doesn't take arguments)
 
 #### func
 Identifing which function is triggered (usually only used in development)
@@ -38,18 +41,18 @@ First agument should be the name of your choosing for the data you want to log. 
 
 ### Example
 ```javascript
-	data = {a:1,b:2,c:3};
+data = {a:1,b:2,c:3};
 
-	log.event('My Event Name', data);
+log.event('My Event Name', data);
 ```
 ```javascript
-	=> info:	My Event Name	{a:1,b:2,c:3}
+=> info:	My Event Name	{a:1,b:2,c:3}
 
 ```
 
 But you can also simply use it like this
 ```javascript
-	log.event(data);
+log.event(data);
 ```
 ```javascript
-	=> info:	{a:1,b:2,c:3}
+=> info:	{a:1,b:2,c:3}
