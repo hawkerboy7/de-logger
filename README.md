@@ -1,2 +1,2 @@
-# logger
+# Logger
 Logger module for projects

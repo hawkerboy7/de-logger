@@ -1,0 +1,13 @@
+{
+  "name": "logger",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Logger module for projects",
+  "main": "build/server/app.js",
+  "dependencies": {
+    "underscore": "^1.8.2"
+  },
+  "devDependencies": {
+    "id-builder": "^1.6.0"
+  }
+}
