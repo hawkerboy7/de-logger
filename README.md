@@ -90,12 +90,17 @@ Output
 ```
 info:	{a:1,b:2,c:3}
 event:	{a:1,b:2,c:3}
-
+```
 
 ## Planned Features
 
 ### Provide options
 
-#### Different logging in development and production (staging)
+- Turn time / date on or off
 
-#### Save log messages to a log file
+- Different logging in development and production (staging)
+
+- Save log messages to a log file
+
+### Change the func method
+Make method func self aware. So if it is possible let the func method figure out the name of the function it is in.
