@@ -41,7 +41,6 @@ First agument should be the name of your choosing for the data you want to log. 
 
 ### Example
 ```javascript
-
 var data, data2, log;
 
 log = require('../server/app');
@@ -89,7 +88,7 @@ log.event(data);
 Output
 ```
 info:	{a:1,b:2,c:3}
-event:	{a:1,b:2,c:3}
+event:	{a:4,b:5,c:6}
 ```
 
 ## Planned Features
