@@ -1,5 +1,5 @@
 # de-logger
-Allows you to log events in your project during development and during production in the console and/or in a file.
+Allows you to log events in your project in the console with different colours and alignment.
 
 
 ## Getting Started
@@ -17,27 +17,27 @@ var log = require('de-logger');
 ## API
 ### Methodes
 
-#### clear
+__clear__
 Clear the console (this doesn't take arguments)
 
-#### func
+__func__
 Identifing which function is triggered (usually only used in development)
 
-#### info
+__info__
 Display general information like which port your webserver is running on
 
-#### event
+__event__
 Keep track of specific (socket) events.
 
-#### warn
+__warn__
 Show warnings
 
-#### error
+__error__
 Show errors
 
 ### Usage
 It basically works the same way as console.log only it ads colours and formatting to the message.
-First agument should be the name of your choosing for the data you want to log. The second argument should be the data. You may also add more arguments containing data. It uses \t to allign your first argument and second argument.
+First agument should be the name of your choosing for the data you want to log. The second argument should be the data. You may also add more arguments containing data. It uses \t and spaces to allign your first and second argument.
 
 ### Example
 ```javascript
@@ -77,7 +77,7 @@ func:	First function
 info:	Webserver	{ a: 1, b: 2, c: 3 }
 event:	Gui input	{ a: 4, b: 5, c: 6 }
 warn:	Usermodel	Cannot find a user id
-error:	Mongodb	Connection with mongodb couldn't be established
+error:	Mongodb		Connection with mongodb couldn't be established
 
 ```
 
@@ -90,3 +90,12 @@ Output
 ```
 info:	{a:1,b:2,c:3}
 event:	{a:1,b:2,c:3}
+
+
+## Planned Features
+
+### Provide options
+
+#### Different logging in development and production (staging)
+
+#### Save log messages to a log file
