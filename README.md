@@ -67,7 +67,7 @@ log.event('Gui input', data2);
 
 log.warn('Usermodel', 'Cannot find a user id');
 
-log.error('Mongodb', 'Connection with mongodb couldn\t be established');
+log.error('Mongodb', 'Connection with mongodb couldn\'t be established');
 
 ```
 Output
