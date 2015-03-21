@@ -9,52 +9,61 @@ Logger = require './logger'
 # --------------------------------------------------
 config =
 
-	# Turn on or off completely
-	on				: true
-
 	# Show in terminal
-	terminal		: true
+	terminal	: true
 
-	# Store log
-	store			: false
+	# Store in file
+	file		: false
 
-	# Global settings
-	global:
-		use			: true
-		notify		: false
-		time:
-			show	: false
-			date	: false
+	# Show time
+	time		: true
 
-	error:
-		display		: true
-		time:
-			show	: true
-			date	: false
+	# Show date
+	date		: true
 
-	info:
-		display		: true
-		time:
-			show	: true
-			date	: false
+	# # Global settings
+	# global:
+	# 	use			: true
+	# 	notify		: false
+	# 	time:
+	# 		show	: false
+	# 		date	: false
 
-	func:
-		display		: true
-		time:
-			show	: true
-			date	: false
+	# func:
+	# 	display		: true
+	# 	time:
+	# 		show	: true
+	# 		date	: false
 
-	event:
-		display		: true
-		time:
-			show	: true
-			date	: false
+	# debug:
+	# 	display		: true
+	# 	time:
+	# 		show	: true
+	# 		date	: false
 
-	warn:
-		display		: true
-		time:
-			show	: true
-			date	: false
+	# info:
+	# 	display		: true
+	# 	time:
+	# 		show	: true
+	# 		date	: false
+
+	# event:
+	# 	display		: true
+	# 	time:
+	# 		show	: true
+	# 		date	: false
+
+	# warn:
+	# 	display		: true
+	# 	time:
+	# 		show	: true
+	# 		date	: false
+
+	# error:
+	# 	display		: true
+	# 	time:
+	# 		show	: true
+	# 		date	: false
 
 
 

@@ -1,5 +1,5 @@
 # --------------------------------------------------
-# Global variable
+# "Global" variable
 # --------------------------------------------------
 config = {}
 
@@ -8,79 +8,107 @@ config = {}
 # --------------------------------------------------
 class Logger
 
-	constructor: (conf) ->
+	constructor: (con) ->
 
-		# Make the config globally available
-		config = conf
-
-		# Completely block the log
-		return unless config.on
-
-		# Check if users wants to be notified
-		if config.global.notify
-
-			# Notify if globals are being used or not
-			if config.global.use
-				console.log `'\033[32minfo\033[0m:\t'` + 'Time will be displayed the same for each function!\n'
-			else
-				console.log `'\033[32minfo\033[0m:\t'` + 'Time will be displayed on individual basis!\n'
+		# Make the config available in this script
+		config = con
 
 
 	# --------------------------
 	#	Public log functions
 	# --------------------------
+	clear: ->
+		try
+			# Should work on windows too (only tested in Ubuntu 14.04 though...)
+			console.log `'\033c'`
+
+		catch e
+			# This adds newlines untill console has been cleared
+			console.log `'\u001b[2J\u001b[0;0H'`
+
+
+	func: ->
+		return unless check 'func'
+
+		prep arguments, '35m', 'func'
+
+
+
+
+	debug: (type,msg) ->
+		prep type, msg, '34m', 'debug'
+
+	info: (type,msg) ->
+		prep type, msg, '32m', 'info'
+
+	event: (type,msg) ->
+		prep type, msg, '36m', 'event'
+
+	warn: (type, msg) ->
+		prep type, msg, '33m', 'warn'
+
+	error: (type, msg) ->
+		prep type, msg, '31m', 'error'
+
+
+
+
+
 	set: (settings) ->
 		@error 'Cannot set Properties yet :('
 		# mergeRecursive config, settings
-
-	error: (type, msg) ->
-		prep type, msg, '31m', 'error'	if config.error.display
-
-	info: (type,msg) ->
-		prep type, msg, '32m', 'info'	if config.info.display
-
-	func: (type,msg) ->
-		prep type, msg, '34m', 'func'	if config.func.display
-
-	event: (type,msg) ->
-		prep type, msg, '36m', 'event'	if config.event.display
-
-	warn: (type, msg) ->
-		prep type, msg, '33m', 'warn'	if config.warn.display
-
-	clear: -> console.log `'\u001b[2J\u001b[0;0H'`
 
 
 	# --------------------------
 	#	Private helper functions
 	# --------------------------
-	prep = (type, msg, color, name) ->
+	check = (name) -> config.terminal and (config[name]?.display isnt false)
 
-		return unless config.on
+	prep = (argumenten, color, functionName) ->
 
-		space = '   '
+		console.log argumenten
+		# console.log argumenten[0]
+		# console.log
+		# console.log argumenten[2]
+		# console.log argumenten[3]
 
-		# Allow for msg-only calls aswell
-		unless msg?
-			msg		= space + type
-			type	= ''
-		else
-			tab = '\t'
-			if type.length < 5
-				tab = '     \t'
-			type = space + type + tab
+		name	= ''
+		message	= ''
 
-		# Allow for objects and arrays as well
-		if typeof msg is 'array' or typeof msg is 'object'
+		name = argumenten[0] if argumenten[1]
 
-			# Send to logMe with an array or object as well
-			return logMe(`'\033['` +color+name+ `'\033[0m:\t'` + getTime(name) + type, msg)
+		console.log name
 
-		# Send to logMe
-		logMe(`'\033['` +color+name+ `'\033[0m:\t'` + getTime(name) + type + msg)
+
+
+		# msg	= argumenten[1]
+		# type	= argumenten[0]
+
+
+		# space = '   '
+
+		# # Allow for msg-only calls aswell
+		# unless msg?
+		# 	msg		= space + type
+		# 	type	= ''
+		# else
+		# 	tab = '\t'
+		# 	if type.length < 5
+		# 		tab = '     \t'
+		# 	type = space + type + tab
+
+		# # Allow for objects and arrays as well
+		# if typeof msg is 'array' or typeof msg is 'object'
+
+		# 	# Send to logMe with an array or object as well
+		# 	return logMe(`'\033['` +color+name+ `'\033[0m:\t'` + getTime(name) + type, msg)
+
+		# # Send to logMe
+		# logMe(`'\033['` +color+name+ `'\033[0m:\t'` + getTime(name) + type + msg)
 
 
 	getTime = (name) ->
+		return
 
 		# Get time now
 		time = new Date

@@ -3,84 +3,72 @@ var Logger, config;
 config = {};
 
 Logger = (function() {
-  var getTime, lead, logFile, logMe, makeDateTime, makeTime, mergeRecursive, prep;
+  var check, getTime, lead, logFile, logMe, makeDateTime, makeTime, mergeRecursive, prep;
 
-  function Logger(conf) {
-    config = conf;
-    if (!config.on) {
+  function Logger(con) {
+    config = con;
+  }
+
+  Logger.prototype.clear = function() {
+    var e;
+    try {
+      return console.log('\033c');
+    } catch (_error) {
+      e = _error;
+      return console.log('\u001b[2J\u001b[0;0H');
+    }
+  };
+
+  Logger.prototype.func = function() {
+    if (!check('func')) {
       return;
     }
-    if (config.global.notify) {
-      if (config.global.use) {
-        console.log('\033[32minfo\033[0m:\t' + 'Time will be displayed the same for each function!\n');
-      } else {
-        console.log('\033[32minfo\033[0m:\t' + 'Time will be displayed on individual basis!\n');
-      }
-    }
-  }
+    return prep(arguments, '35m', 'func');
+  };
+
+  Logger.prototype.debug = function(type, msg) {
+    return prep(type, msg, '34m', 'debug');
+  };
+
+  Logger.prototype.info = function(type, msg) {
+    return prep(type, msg, '32m', 'info');
+  };
+
+  Logger.prototype.event = function(type, msg) {
+    return prep(type, msg, '36m', 'event');
+  };
+
+  Logger.prototype.warn = function(type, msg) {
+    return prep(type, msg, '33m', 'warn');
+  };
+
+  Logger.prototype.error = function(type, msg) {
+    return prep(type, msg, '31m', 'error');
+  };
 
   Logger.prototype.set = function(settings) {
     return this.error('Cannot set Properties yet :(');
   };
 
-  Logger.prototype.error = function(type, msg) {
-    if (config.error.display) {
-      return prep(type, msg, '31m', 'error');
-    }
+  check = function(name) {
+    var ref;
+    return config.terminal && (((ref = config[name]) != null ? ref.display : void 0) !== false);
   };
 
-  Logger.prototype.info = function(type, msg) {
-    if (config.info.display) {
-      return prep(type, msg, '32m', 'info');
+  prep = function(argumenten, color, functionName) {
+    var message, name;
+    console.log(argumenten);
+    name = '';
+    message = '';
+    if (argumenten[1]) {
+      name = argumenten[0];
     }
-  };
-
-  Logger.prototype.func = function(type, msg) {
-    if (config.func.display) {
-      return prep(type, msg, '34m', 'func');
-    }
-  };
-
-  Logger.prototype.event = function(type, msg) {
-    if (config.event.display) {
-      return prep(type, msg, '36m', 'event');
-    }
-  };
-
-  Logger.prototype.warn = function(type, msg) {
-    if (config.warn.display) {
-      return prep(type, msg, '33m', 'warn');
-    }
-  };
-
-  Logger.prototype.clear = function() {
-    return console.log('\u001b[2J\u001b[0;0H');
-  };
-
-  prep = function(type, msg, color, name) {
-    var space, tab;
-    if (!config.on) {
-      return;
-    }
-    space = '   ';
-    if (msg == null) {
-      msg = space + type;
-      type = '';
-    } else {
-      tab = '\t';
-      if (type.length < 5) {
-        tab = '     \t';
-      }
-      type = space + type + tab;
-    }
-    if (typeof msg === 'array' || typeof msg === 'object') {
-      return logMe('\033[' + color + name + '\033[0m:\t' + getTime(name) + type, msg);
-    }
-    return logMe('\033[' + color + name + '\033[0m:\t' + getTime(name) + type + msg);
+    return console.log(name);
   };
 
   getTime = function(name) {
     var time;
+    return;
     time = new Date;
     if (config.global.use) {
       if (!config.global.time.show) {
