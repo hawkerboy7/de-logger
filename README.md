@@ -63,7 +63,7 @@ log.func('First function');
 
 log.info('Webserver', data);
 
-log.event('Gui input, data2);
+log.event('Gui input', data2);
 
 log.warn('Usermodel', 'Cannot find a user id');
 
