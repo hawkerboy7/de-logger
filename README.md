@@ -61,13 +61,13 @@ log.clear();
 
 log.func('First function');
 
-log.info('Log info', data);
+log.info('Webserver', 'Log info', data);
 
-log.event('Log event', data2);
+log.event('Gui input, 'Log event', data2);
 
-log.warn('Cannot find a user id');
+log.warn('Usermodel', 'Cannot find a user id');
 
-log.error('Connection with mongodb couldn\t be established');
+log.error('Mongodb', 'Connection with mongodb couldn\t be established');
 
 ```
 Output

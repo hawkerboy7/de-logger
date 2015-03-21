@@ -1,6 +1,6 @@
 {
   "name": "de-logger",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Logger module for projects",
   "main": "build/server/app.js",
   "devDependencies": {
