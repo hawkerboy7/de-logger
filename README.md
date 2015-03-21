@@ -61,9 +61,9 @@ log.clear();
 
 log.func('First function');
 
-log.info('Webserver', 'Log info', data);
+log.info('Webserver', data);
 
-log.event('Gui input, 'Log event', data2);
+log.event('Gui input', data2);
 
 log.warn('Usermodel', 'Cannot find a user id');
 
