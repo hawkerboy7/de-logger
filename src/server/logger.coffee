@@ -23,7 +23,7 @@ class Logger
 			console.log `'\033c'`
 
 		catch e
-			# This adds newlines untill console has been cleared
+			# This adds newlines untill console has been cleared and goed back to top
 			console.log `'\u001b[2J\u001b[0;0H'`
 
 
