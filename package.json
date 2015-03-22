@@ -1,7 +1,7 @@
 {
   "name": "de-logger",
-  "version": "0.0.10",
-  "description": "Logger module for projects",
+  "version": "0.0.12",
+  "description": "Log different types of events in the console with different colours and some alignment",
   "main": "build/server/app.js",
   "devDependencies": {
     "id-builder": "^1.6.0"

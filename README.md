@@ -1,7 +1,4 @@
 # de-logger
-Allows you to log events in your project in the console with different colours and alignment.
-
-
 ## Getting Started
 
 Install de-logger using npm install
