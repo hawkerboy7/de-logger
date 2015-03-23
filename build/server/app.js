@@ -5,9 +5,9 @@ Logger = require('./logger');
 config = {
   terminal: true,
   file: false,
-  date: true,
-  time: true,
-  ms: true
+  date: false,
+  time: false,
+  ms: false
 };
 
 module.exports = new Logger(config);

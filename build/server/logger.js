@@ -1,4 +1,6 @@
-var Logger, config;
+var Logger, _, config;
+
+_ = require('underscore');
 
 config = {};
 
@@ -62,7 +64,7 @@ Logger = (function() {
   };
 
   Logger.prototype.set = function(settings) {
-    return this.error('Cannot set Properties yet :(');
+    return _.extend(config, settings);
   };
 
   check = function(name) {
@@ -102,10 +104,7 @@ Logger = (function() {
     if (set) {
       message += '  ';
     }
-    message += '\033[' + color + functionName + '\033[0m';
-    if (set) {
-      message += '  ';
-    }
+    message += '\033[' + color + functionName + '\033[0m  ';
     if (name) {
       message += '\033[37m' + name + '\033[0m';
     }

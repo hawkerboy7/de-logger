@@ -4,6 +4,12 @@ log = require('../server/app');
 
 log.clear();
 
+log.set({
+  date: false,
+  time: false,
+  ms: false
+});
+
 log.func('func', {
   a: 3,
   b: 3

@@ -1,4 +1,9 @@
 # --------------------------------------------------
+# NPM module
+# --------------------------------------------------
+_ = require 'underscore'
+
+# --------------------------------------------------
 # "Global" variable
 # --------------------------------------------------
 config = {}
@@ -12,7 +17,6 @@ class Logger
 
 		# Make the config available in this script
 		config = con
-
 
 	# --------------------------
 	#	Public log functions
@@ -50,11 +54,8 @@ class Logger
 		return unless check 'error'
 		prep arguments, '31m', 'error'
 
-
 	set: (settings) ->
-		@error 'Cannot set Properties yet :('
-		# mergeRecursive config, settings
-
+		_.extend config, settings
 
 	# --------------------------
 	#	Private helper functions
@@ -96,11 +97,7 @@ class Logger
 			message += '  '
 
 		# Add function name in color
-		message += `'\033['` +color+functionName+ `'\033[0m'`
-
-		# Determin space2
-		if set
-			message += '  '
+		message += `'\033['` +color+functionName+ `'\033[0m  '`
 
 		# Add name
 		if name

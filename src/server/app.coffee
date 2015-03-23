@@ -16,13 +16,13 @@ config =
 	file		: false
 
 	# Show date
-	date		: true
+	date		: false
 
 	# Show time
-	time		: true
+	time		: false
 
 	# Show ms
-	ms			: true
+	ms			: false
 
 
 

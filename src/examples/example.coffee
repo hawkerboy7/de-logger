@@ -3,6 +3,11 @@ log = require '../server/app'
 
 log.clear()
 
+log.set
+	date: false
+	time: false
+	ms: false
+
 log.func	'func',		a:3, b:3, [1,2,3,4]
 log.debug	'debug',	{a:3}, {b:3}
 log.info	'info',		{a:3,b:3}
