@@ -88,7 +88,7 @@ log.info('Name','Running at port:', port);
 ```
 Simple output
 ```
-info  Name - Running at port: 8000
+info  Name → Running at port: 8000
 ```
 
 
@@ -149,11 +149,11 @@ log.error('Mongodb', 'Connection with mongodb couldn\'t be established');
 Big Output
 ```
 func  First function
-debug Debugging - Debug message { a: 1, b: 2, c: 3 }
-09:19:28  info  Webserver - Running at port: 8000
-09:19:28  event Gui input - { a: 4, b: 5, c: 6 }
-23-03-2015 09:19:28  warn  Usermodel - Cannot find a user id
-23-03-2015 09:19:28  error Mongodb - Connection with mongodb couldn't be established
+debug Debugging → Debug message { a: 1, b: 2, c: 3 }
+09:19:28  info  Webserver → Running at port: 8000
+09:19:28  event Gui input → { a: 4, b: 5, c: 6 }
+23-03-2015 09:19:28  warn  Usermodel → Cannot find a user id
+23-03-2015 09:19:28  error Mongodb → Connection with mongodb couldn't be established
 ```
 You can still provide your data as the only argument
 ```javascript
@@ -202,21 +202,21 @@ log.info('name', 'data');
 ```
 Current Output
 ```
-info  name_smal - data
-info  name_bigger - data
-info  name - data
-info  name_12 - data
-info  name_even_bigger - data
-info  name_normal - data
-info  name - data
+info  name_smal → data
+info  name_bigger → data
+info  name → data
+info  name_12 → data
+info  name_even_bigger → data
+info  name_normal → data
+info  name → data
 ```
 New output
 ```
-info  name_smal - data
-info  name_bigger - data
-info  name        - data
-info  name_12     - data
-info  name_even_bigger - data
-info  name_normal      - data
-info  name             - data
+info  name_smal → data
+info  name_bigger → data
+info  name        → data
+info  name_12     → data
+info  name_even_bigger → data
+info  name_normal      → data
+info  name             → data
 ```
