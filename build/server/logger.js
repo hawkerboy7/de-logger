@@ -12,11 +12,9 @@ Logger = (function() {
   }
 
   Logger.prototype.clear = function() {
-    var e;
-    try {
+    if (config.clear) {
       return console.log('\033c');
-    } catch (_error) {
-      e = _error;
+    } else {
       return console.log('\u001b[2J\u001b[0;0H');
     }
   };
@@ -74,6 +72,9 @@ Logger = (function() {
 
   prep = function(argumenten, color, functionName) {
     var message, name, set;
+    if (!argumenten[0]) {
+      return;
+    }
     set = 0;
     name = '';
     message = '';
@@ -108,12 +109,16 @@ Logger = (function() {
     if (name) {
       message += '\033[37m' + name + '\033[0m';
     }
-    message += ' -';
+    if (name) {
+      message += ' -';
+    }
     return log(name, message, argumenten);
   };
 
   log = function(name, message, argumenten) {
-    if (name) {
+    if (!name) {
+      argumenten[0] = message + argumenten[0];
+    } else {
       argumenten[0] = message;
     }
     console.log.apply(null, argumenten);
@@ -145,7 +150,7 @@ Logger = (function() {
   };
 
   logFile = function(name, message, argumenten) {
-    return console.log('Store in file');
+    return console.log('Cannot log to file yet. Wait for version 0.2.0');
   };
 
   return Logger;

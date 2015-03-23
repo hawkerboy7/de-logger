@@ -7,7 +7,8 @@ config = {
   file: false,
   date: false,
   time: false,
-  ms: false
+  ms: false,
+  whipe: false
 };
 
 module.exports = new Logger(config);

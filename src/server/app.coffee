@@ -24,6 +24,8 @@ config =
 	# Show ms
 	ms			: false
 
+	# Whipe history
+	whipe		: false
 
 
 module.exports = new Logger config

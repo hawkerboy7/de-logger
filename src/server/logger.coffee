@@ -22,12 +22,11 @@ class Logger
 	#	Public log functions
 	# --------------------------
 	clear: ->
-		try
-			# Should work on windows too (only tested in Ubuntu 14.04 though...)
+		if config.clear
+			# Clear and wipe history
 			console.log `'\033c'`
-
-		catch e
-			# This adds newlines untill console has been cleared and goed back to top
+		else
+			# Clear and mantain history
 			console.log `'\u001b[2J\u001b[0;0H'`
 
 	func: ->
@@ -63,6 +62,9 @@ class Logger
 	check = (name) -> config.terminal and (config[name]?.display isnt false)
 
 	prep = (argumenten, color, functionName) ->
+
+		# Don't to anything if arguments are not provided
+		return unless argumenten[0]
 
 		set		= 0
 		name	= ''
@@ -104,7 +106,7 @@ class Logger
 			message += `'\033[37m'` +name+ `'\033[0m'`
 
 		# Determin space3
-		message += ' -'
+		message += ' -' if name
 
 		# Head to log
 		log name, message, argumenten
@@ -112,7 +114,9 @@ class Logger
 
 	log = (name,message, argumenten) ->
 
-		if name
+		unless name
+			argumenten[0] = message+argumenten[0]
+		else
 			argumenten[0] = message
 
 		# Send the arguments to console log
@@ -158,7 +162,7 @@ class Logger
 
 
 	logFile = (name,message, argumenten) ->
-		console.log 'Store in file'
+		console.log 'Cannot log to file yet. Wait for version 0.2.0'
 
 
 
