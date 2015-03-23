@@ -12,7 +12,6 @@ var log = require('de-logger');
 ```
 
 
-
 ## API
 
 ### set({config})
@@ -56,7 +55,7 @@ config = {
 ```
 
 ### clear()
-Clears the console, based on your config your console scroll history will be wiped too.
+Clears the console. Based on your config your console scroll history will be wiped too.
 
 ### func(*)
 Identifing which function is triggered (suppling the function name is still required for now)
@@ -77,10 +76,8 @@ Show warnings
 Show errors
 
 
-
 ## Usage
 \* It basically works the same way as console.log() only it ads colours and formatting to the message. First agument should be the name of your choosing for the data you want to log. The rest of the arguments should be the data. You may also provide one argument containing data.
-
 
 
 ## Simple Example
@@ -93,7 +90,6 @@ Simple output
 ```
 info  Name - Running at port: 8000
 ```
-
 
 
 ## Big Example
