@@ -110,7 +110,7 @@ Logger = (function() {
       message += ' \033[0m' + name + '\033[037m';
     }
     if (name) {
-      message += ' -';
+      message += ' → ';
     }
     return log(name, message, argumenten);
   };

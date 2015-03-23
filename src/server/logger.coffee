@@ -106,7 +106,7 @@ class Logger
 			message += `' \033[0m'` +name+ `'\033[037m'`
 
 		# Determin space3
-		message += ' -' if name
+		message += ' → ' if name
 
 		# Head to log
 		log name, message, argumenten
