@@ -26,11 +26,9 @@ class Logger
 			# This adds newlines untill console has been cleared and goed back to top
 			console.log `'\u001b[2J\u001b[0;0H'`
 
-
 	func: ->
 		return unless check 'func'
-		prep arguments, '35m', 'func'
-
+		prep arguments, '35m', 'func '
 
 	debug: ->
 		return unless check 'debug'
@@ -38,7 +36,7 @@ class Logger
 
 	info: ->
 		return unless check 'info'
-		prep arguments, '32m', 'info'
+		prep arguments, '32m', 'info '
 
 	event: ->
 		return unless check 'event'
@@ -46,12 +44,11 @@ class Logger
 
 	warn: ->
 		return unless check 'warn'
-		prep arguments, '33m', 'warn'
+		prep arguments, '33m', 'warn '
 
 	error: ->
 		return unless check 'error'
 		prep arguments, '31m', 'error'
-
 
 
 	set: (settings) ->
@@ -68,9 +65,6 @@ class Logger
 
 		set		= 0
 		name	= ''
-		space	= ''
-		space2	= ''
-		space3	= ''
 		message	= ''
 
 		if argumenten[1] and typeof argumenten[0] is 'string'
@@ -86,8 +80,8 @@ class Logger
 		if config.time
 			if set
 				message += ' '
-			else
-				set += 2
+
+			set += 2
 			message += getTime()
 
 		if config.time and config.ms
@@ -98,29 +92,22 @@ class Logger
 		message += `'\033[0m'` if config.date or config.time
 
 		# Determin space
-		space = '\t' if set isnt 0
-
-		message += space
+		if set
+			message += '  '
 
 		# Add function name in color
 		message += `'\033['` +color+functionName+ `'\033[0m'`
 
 		# Determin space2
-		space2 = '\t' if set is 0
-
-		message += space2
+		if set
+			message += '  '
 
 		# Add name
 		if name
-			message += `'\033[0m'` +name
+			message += `'\033[37m'` +name+ `'\033[0m'`
 
 		# Determin space3
-		space3 = '\t' if set is 0
-
-		message += space3
-
-		# Start showing data in light grey
-		message += `'\033[37m'`
+		message += ' -'
 
 		# Head to log
 		log name, message, argumenten
@@ -131,28 +118,11 @@ class Logger
 		if name
 			argumenten[0] = message
 
-		console.log argumenten
-
-		# Turn color back to white
-		argumenten[4] = `'\033[0mhoi'`
-
-		console.log argumenten
-
 		# Send the arguments to console log
 		console.log.apply null, argumenten
 
 		# Add message to a log file
 		logFile name, message if config.file
-
-
-	iterate = (argumenten) ->
-
-		# argumenten
-		return ''
-
-
-	logFile = (name,message, argumenten) ->
-		console.log 'Store in file'
 
 
 	getDate = ->
@@ -182,22 +152,16 @@ class Logger
 		time = new Date
 
 		# Return miliseconds in nice format
-		return	':'+lead(time.getMilliseconds())
-
-
-	# Check if msg needs to be stored and or "console.log-ed"
-	logMe = (msg,obj) ->
-		unless obj
-			logFile msg					if config.store
-			console.log msg				if config.terminal
-		else
-			logFile msg, obj			if config.store
-			console.log msg, obj		if config.terminal
+		return	'.'+lead(time.getMilliseconds())
 
 
 	# Add a leading 0 to time
 	lead = (time) ->
 		('0'+time).slice(-2)
+
+
+	logFile = (name,message, argumenten) ->
+		console.log 'Store in file'
 
 
 

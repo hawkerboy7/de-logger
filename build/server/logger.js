@@ -3,7 +3,7 @@ var Logger, config;
 config = {};
 
 Logger = (function() {
-  var check, getDate, getMs, getTime, iterate, lead, log, logFile, logMe, prep;
+  var check, getDate, getMs, getTime, lead, log, logFile, prep;
 
   function Logger(con) {
     config = con;
@@ -23,7 +23,7 @@ Logger = (function() {
     if (!check('func')) {
       return;
     }
-    return prep(arguments, '35m', 'func');
+    return prep(arguments, '35m', 'func ');
   };
 
   Logger.prototype.debug = function() {
@@ -37,7 +37,7 @@ Logger = (function() {
     if (!check('info')) {
       return;
     }
-    return prep(arguments, '32m', 'info');
+    return prep(arguments, '32m', 'info ');
   };
 
   Logger.prototype.event = function() {
@@ -51,7 +51,7 @@ Logger = (function() {
     if (!check('warn')) {
       return;
     }
-    return prep(arguments, '33m', 'warn');
+    return prep(arguments, '33m', 'warn ');
   };
 
   Logger.prototype.error = function() {
@@ -71,12 +71,9 @@ Logger = (function() {
   };
 
   prep = function(argumenten, color, functionName) {
-    var message, name, set, space, space2, space3;
+    var message, name, set;
     set = 0;
     name = '';
-    space = '';
-    space2 = '';
-    space3 = '';
     message = '';
     if (argumenten[1] && typeof argumenten[0] === 'string') {
       name = argumenten[0];
@@ -91,9 +88,8 @@ Logger = (function() {
     if (config.time) {
       if (set) {
         message += ' ';
-      } else {
-        set += 2;
       }
+      set += 2;
       message += getTime();
     }
     if (config.time && config.ms) {
@@ -103,23 +99,17 @@ Logger = (function() {
     if (config.date || config.time) {
       message += '\033[0m';
     }
-    if (set !== 0) {
-      space = '\t';
+    if (set) {
+      message += '  ';
     }
-    message += space;
     message += '\033[' + color + functionName + '\033[0m';
-    if (set === 0) {
-      space2 = '\t';
+    if (set) {
+      message += '  ';
     }
-    message += space2;
     if (name) {
-      message += '\033[0m' + name;
+      message += '\033[37m' + name + '\033[0m';
     }
-    if (set === 0) {
-      space3 = '\t';
-    }
-    message += space3;
-    message += '\033[37m';
+    message += ' -';
     return log(name, message, argumenten);
   };
 
@@ -127,21 +117,10 @@ Logger = (function() {
     if (name) {
       argumenten[0] = message;
     }
-    console.log(argumenten);
-    argumenten[4] = '\033[0mhoi';
-    console.log(argumenten);
     console.log.apply(null, argumenten);
     if (config.file) {
       return logFile(name, message);
     }
-  };
-
-  iterate = function(argumenten) {
-    return '';
-  };
-
-  logFile = function(name, message, argumenten) {
-    return console.log('Store in file');
   };
 
   getDate = function() {
@@ -159,29 +138,15 @@ Logger = (function() {
   getMs = function() {
     var time;
     time = new Date;
-    return ':' + lead(time.getMilliseconds());
-  };
-
-  logMe = function(msg, obj) {
-    if (!obj) {
-      if (config.store) {
-        logFile(msg);
-      }
-      if (config.terminal) {
-        return console.log(msg);
-      }
-    } else {
-      if (config.store) {
-        logFile(msg, obj);
-      }
-      if (config.terminal) {
-        return console.log(msg, obj);
-      }
-    }
+    return '.' + lead(time.getMilliseconds());
   };
 
   lead = function(time) {
     return ('0' + time).slice(-2);
+  };
+
+  logFile = function(name, message, argumenten) {
+    return console.log('Store in file');
   };
 
   return Logger;
