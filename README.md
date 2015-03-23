@@ -22,29 +22,26 @@ config = {
   "ms":       false,
   "date":     false,
   "time":     false,
-  "whipe":    false
-  "align":    true
-  "space":    0
+  "align":    true,
+  "space":    0,
+  "whipe":    false,
   "terminal": true
 };
 ```
-__ms__        _true / false_
+__ms__ _true / false_
 Add miliseconds to time (only works if time is true)
 
-__date__      _true / false_
+__date__ _true / false_
 Show the current date
 
-__time__      _true / false_
+__time__ _true / false_
 Show the current time
 
-__whipe__     _true / false_
-This will also clear the console history
-
-__align__     _true / false_
+__align__ _true / false_
 Will make sure the data logged after the name is in alignment with the largest name provided.
 ```javascript
-info  Name_short → Second value         // space = 10
-info  Name_normal → First value         // space = 11
+info  Name_short → First value          // space = 10
+info  Name_normal → Second value        // space = 11
 info  Name        → Third value         // space = 11
 info  Name_even_lager → Fourth value    // space = 15
 info  name_short      → Fifth value     // space = 15
@@ -52,6 +49,9 @@ info  hi              → Sixth value     // space = 15
 ```
 __space__     _int_    _ _
 The amount of characters the name area should contain. Default is 0 and grows whenever a name with a bigger length is provided (as is shown in the example above), but you can choose to start with another number.
+
+__whipe__     _true / false_
+This will also clear the console history
 
 __terminal__  _true / false_
 Show messages in the terminal
