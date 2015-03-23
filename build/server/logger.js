@@ -71,7 +71,7 @@ Logger = (function() {
   };
 
   prep = function(argumenten, color, functionName) {
-    var message, name, set;
+    var i, length, message, name, set;
     if (!argumenten[0]) {
       return;
     }
@@ -108,6 +108,17 @@ Logger = (function() {
     message += '\033[' + color + functionName + '\033[0m';
     if (name) {
       message += ' \033[0m' + name + '\033[037m';
+      if (config.align) {
+        length = name.length;
+        if (length > config.space) {
+          config.space = length;
+        }
+        i = 0;
+        while (i < (config.space - length)) {
+          message += ' ';
+          i++;
+        }
+      }
     }
     if (name) {
       message += ' → ';
