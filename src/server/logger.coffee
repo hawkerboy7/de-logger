@@ -29,28 +29,28 @@ class Logger
 
 	func: ->
 		return unless check 'func'
-
 		prep arguments, '35m', 'func'
 
 
+	debug: ->
+		return unless check 'debug'
+		prep arguments, '34m', 'debug'
 
+	info: ->
+		return unless check 'info'
+		prep arguments, '32m', 'info'
 
-	debug: (type,msg) ->
-		prep type, msg, '34m', 'debug'
+	event: ->
+		return unless check 'event'
+		prep arguments, '36m', 'event'
 
-	info: (type,msg) ->
-		prep type, msg, '32m', 'info'
+	warn: ->
+		return unless check 'warn'
+		prep arguments, '33m', 'warn'
 
-	event: (type,msg) ->
-		prep type, msg, '36m', 'event'
-
-	warn: (type, msg) ->
-		prep type, msg, '33m', 'warn'
-
-	error: (type, msg) ->
-		prep type, msg, '31m', 'error'
-
-
+	error: ->
+		return unless check 'error'
+		prep arguments, '31m', 'error'
 
 
 
@@ -66,91 +66,123 @@ class Logger
 
 	prep = (argumenten, color, functionName) ->
 
-		console.log argumenten
-		# console.log argumenten[0]
-		# console.log
-		# console.log argumenten[2]
-		# console.log argumenten[3]
-
+		set		= 0
 		name	= ''
+		space	= ''
+		space2	= ''
+		space3	= ''
 		message	= ''
 
-		name = argumenten[0] if argumenten[1]
+		if argumenten[1] and typeof argumenten[0] is 'string'
+			name = argumenten[0]
 
-		console.log name
+		# Start of time in black
+		message += `'\033[30m'` if config.date or config.time
+
+		if config.date
+			set += 1
+			message += getDate()
+
+		if config.time
+			if set
+				message += ' '
+			else
+				set += 2
+			message += getTime()
+
+		if config.time and config.ms
+			set		+= 4
+			message	+= getMs()
+
+		# End of time color
+		message += `'\033[0m'` if config.date or config.time
+
+		# Determin space
+		space = '\t' if set isnt 0
+
+		message += space
+
+		# Add function name in color
+		message += `'\033['` +color+functionName+ `'\033[0m'`
+
+		# Determin space2
+		space2 = '\t' if set is 0
+
+		message += space2
+
+		# Add name
+		if name
+			message += `'\033[0m'` +name
+
+		# Determin space3
+		space3 = '\t' if set is 0
+
+		message += space3
+
+		# Start showing data in light grey
+		message += `'\033[37m'`
+
+		# Head to log
+		log name, message, argumenten
 
 
+	log = (name,message, argumenten) ->
 
-		# msg	= argumenten[1]
-		# type	= argumenten[0]
+		if name
+			argumenten[0] = message
 
+		console.log argumenten
 
-		# space = '   '
+		# Turn color back to white
+		argumenten[4] = `'\033[0mhoi'`
 
-		# # Allow for msg-only calls aswell
-		# unless msg?
-		# 	msg		= space + type
-		# 	type	= ''
-		# else
-		# 	tab = '\t'
-		# 	if type.length < 5
-		# 		tab = '     \t'
-		# 	type = space + type + tab
+		console.log argumenten
 
-		# # Allow for objects and arrays as well
-		# if typeof msg is 'array' or typeof msg is 'object'
+		# Send the arguments to console log
+		console.log.apply null, argumenten
 
-		# 	# Send to logMe with an array or object as well
-		# 	return logMe(`'\033['` +color+name+ `'\033[0m:\t'` + getTime(name) + type, msg)
-
-		# # Send to logMe
-		# logMe(`'\033['` +color+name+ `'\033[0m:\t'` + getTime(name) + type + msg)
+		# Add message to a log file
+		logFile name, message if config.file
 
 
-	getTime = (name) ->
-		return
+	iterate = (argumenten) ->
 
-		# Get time now
+		# argumenten
+		return ''
+
+
+	logFile = (name,message, argumenten) ->
+		console.log 'Store in file'
+
+
+	getDate = ->
+
+		# Get DateTime
 		time = new Date
 
-		# Check if global setting should be used
-		if config.global.use
-
-			# Check if time is need acoording to global
-			return '' unless config.global.time.show
-
-			# Return time
-			return makeTime time unless config.global.time.date
-
-			# Return date and time
-			return makeDateTime time
-
-		# Check if time is needed
-		return '' unless config[name].time.show
-
-		# Return time
-		return makeTime time unless config[name].time.date
-
-		# Return date and time
-		makeDateTime time
+		# Return date in nice format
+		return	lead(time.getDate())+'-'+
+				lead(time.getMonth()+1)+'-'+
+				time.getFullYear()
 
 
-	# Only time
-	makeTime = (time) ->
-		return	lead(time.getHours())			+ ':' +
-				lead(time.getMinutes())			+ ':' +
+	getTime = ->
+
+		# Get DateTime
+		time = new Date
+
+		# Return time in nice format
+		return	lead(time.getHours())+':'+
+				lead(time.getMinutes())+':'+
 				lead(time.getSeconds())
 
 
-	# Complete datetime
-	makeDateTime = (time) ->
-		return	lead(time.getDate())			+ '-' +
-				lead(time.getMonth()+1)			+ '-' +
-				lead(time.getFullYear())		+ ' ' +
-				lead(time.getHours()) 			+ ':' +
-				lead(time.getMinutes())			+ ':' +
-				lead(time.getSeconds())			+ '.' +
-				lead(time.getMilliseconds())	+ ' '
+	getMs = ->
+		# Get DateTime
+		time = new Date
+
+		# Return miliseconds in nice format
+		return	':'+lead(time.getMilliseconds())
 
 
 	# Check if msg needs to be stored and or "console.log-ed"
@@ -163,32 +195,9 @@ class Logger
 			console.log msg, obj		if config.terminal
 
 
-	logFile = (msg) ->
-		console.log 'Store in file'
-
-
 	# Add a leading 0 to time
 	lead = (time) ->
 		('0'+time).slice(-2)
-
-
-	# Merge two objects correctly (doesn't work correctly yet)
-	mergeRecursive = (obj1, obj2) ->
-
-		for p of obj2
-
-			try
-				# Property in destination object set; update its value.
-				if obj2[p].constructor is Object
-					obj1[p] = MergeRecursive(obj1[p], obj2[p])
-				else
-					obj1[p] = obj2[p]
-			catch e
-
-				# Property in destination object not set; create it and set its value.
-				obj1[p] = obj2[p]
-
-			obj1
 
 
 

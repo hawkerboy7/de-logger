@@ -3,7 +3,7 @@ var Logger, config;
 config = {};
 
 Logger = (function() {
-  var check, getTime, lead, logFile, logMe, makeDateTime, makeTime, mergeRecursive, prep;
+  var check, getDate, getMs, getTime, iterate, lead, log, logFile, logMe, prep;
 
   function Logger(con) {
     config = con;
@@ -26,24 +26,39 @@ Logger = (function() {
     return prep(arguments, '35m', 'func');
   };
 
-  Logger.prototype.debug = function(type, msg) {
-    return prep(type, msg, '34m', 'debug');
+  Logger.prototype.debug = function() {
+    if (!check('debug')) {
+      return;
+    }
+    return prep(arguments, '34m', 'debug');
   };
 
-  Logger.prototype.info = function(type, msg) {
-    return prep(type, msg, '32m', 'info');
+  Logger.prototype.info = function() {
+    if (!check('info')) {
+      return;
+    }
+    return prep(arguments, '32m', 'info');
   };
 
-  Logger.prototype.event = function(type, msg) {
-    return prep(type, msg, '36m', 'event');
+  Logger.prototype.event = function() {
+    if (!check('event')) {
+      return;
+    }
+    return prep(arguments, '36m', 'event');
   };
 
-  Logger.prototype.warn = function(type, msg) {
-    return prep(type, msg, '33m', 'warn');
+  Logger.prototype.warn = function() {
+    if (!check('warn')) {
+      return;
+    }
+    return prep(arguments, '33m', 'warn');
   };
 
-  Logger.prototype.error = function(type, msg) {
-    return prep(type, msg, '31m', 'error');
+  Logger.prototype.error = function() {
+    if (!check('error')) {
+      return;
+    }
+    return prep(arguments, '31m', 'error');
   };
 
   Logger.prototype.set = function(settings) {
@@ -56,44 +71,95 @@ Logger = (function() {
   };
 
   prep = function(argumenten, color, functionName) {
-    var message, name;
-    console.log(argumenten);
+    var message, name, set, space, space2, space3;
+    set = 0;
     name = '';
+    space = '';
+    space2 = '';
+    space3 = '';
     message = '';
-    if (argumenten[1]) {
+    if (argumenten[1] && typeof argumenten[0] === 'string') {
       name = argumenten[0];
     }
-    return console.log(name);
+    if (config.date || config.time) {
+      message += '\033[30m';
+    }
+    if (config.date) {
+      set += 1;
+      message += getDate();
+    }
+    if (config.time) {
+      if (set) {
+        message += ' ';
+      } else {
+        set += 2;
+      }
+      message += getTime();
+    }
+    if (config.time && config.ms) {
+      set += 4;
+      message += getMs();
+    }
+    if (config.date || config.time) {
+      message += '\033[0m';
+    }
+    if (set !== 0) {
+      space = '\t';
+    }
+    message += space;
+    message += '\033[' + color + functionName + '\033[0m';
+    if (set === 0) {
+      space2 = '\t';
+    }
+    message += space2;
+    if (name) {
+      message += '\033[0m' + name;
+    }
+    if (set === 0) {
+      space3 = '\t';
+    }
+    message += space3;
+    message += '\033[37m';
+    return log(name, message, argumenten);
   };
 
-  getTime = function(name) {
+  log = function(name, message, argumenten) {
+    if (name) {
+      argumenten[0] = message;
+    }
+    console.log(argumenten);
+    argumenten[4] = '\033[0mhoi';
+    console.log(argumenten);
+    console.log.apply(null, argumenten);
+    if (config.file) {
+      return logFile(name, message);
+    }
+  };
+
+  iterate = function(argumenten) {
+    return '';
+  };
+
+  logFile = function(name, message, argumenten) {
+    return console.log('Store in file');
+  };
+
+  getDate = function() {
     var time;
-    return;
     time = new Date;
-    if (config.global.use) {
-      if (!config.global.time.show) {
-        return '';
-      }
-      if (!config.global.time.date) {
-        return makeTime(time);
-      }
-      return makeDateTime(time);
-    }
-    if (!config[name].time.show) {
-      return '';
-    }
-    if (!config[name].time.date) {
-      return makeTime(time);
-    }
-    return makeDateTime(time);
+    return lead(time.getDate()) + '-' + lead(time.getMonth() + 1) + '-' + time.getFullYear();
   };
 
-  makeTime = function(time) {
+  getTime = function() {
+    var time;
+    time = new Date;
     return lead(time.getHours()) + ':' + lead(time.getMinutes()) + ':' + lead(time.getSeconds());
   };
 
-  makeDateTime = function(time) {
-    return lead(time.getDate()) + '-' + lead(time.getMonth() + 1) + '-' + lead(time.getFullYear()) + ' ' + lead(time.getHours()) + ':' + lead(time.getMinutes()) + ':' + lead(time.getSeconds()) + '.' + lead(time.getMilliseconds()) + ' ';
+  getMs = function() {
+    var time;
+    time = new Date;
+    return ':' + lead(time.getMilliseconds());
   };
 
   logMe = function(msg, obj) {
@@ -114,31 +180,8 @@ Logger = (function() {
     }
   };
 
-  logFile = function(msg) {
-    return console.log('Store in file');
-  };
-
   lead = function(time) {
     return ('0' + time).slice(-2);
-  };
-
-  mergeRecursive = function(obj1, obj2) {
-    var e, p, results;
-    results = [];
-    for (p in obj2) {
-      try {
-        if (obj2[p].constructor === Object) {
-          obj1[p] = MergeRecursive(obj1[p], obj2[p]);
-        } else {
-          obj1[p] = obj2[p];
-        }
-      } catch (_error) {
-        e = _error;
-        obj1[p] = obj2[p];
-      }
-      results.push(obj1);
-    }
-    return results;
   };
 
   return Logger;

@@ -15,11 +15,14 @@ config =
 	# Store in file
 	file		: false
 
-	# Show time
-	time		: true
-
 	# Show date
-	date		: true
+	date		: false
+
+	# Show time
+	time		: false
+
+	# Show ms
+	ms			: false
 
 	# # Global settings
 	# global:
