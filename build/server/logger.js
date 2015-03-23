@@ -78,7 +78,7 @@ Logger = (function() {
     set = 0;
     name = '';
     message = '';
-    if (argumenten[1] && typeof argumenten[0] === 'string') {
+    if (!!(argumenten[1] && typeof argumenten[0] === 'string')) {
       name = argumenten[0];
     }
     if (config.date || config.time) {
@@ -105,9 +105,9 @@ Logger = (function() {
     if (set) {
       message += '  ';
     }
-    message += '\033[' + color + functionName + '\033[0m  ';
+    message += '\033[' + color + functionName + '\033[0m';
     if (name) {
-      message += '\033[37m' + name + '\033[0m';
+      message += ' \033[0m' + name + '\033[037m';
     }
     if (name) {
       message += ' -';
@@ -116,14 +116,23 @@ Logger = (function() {
   };
 
   log = function(name, message, argumenten) {
+    var result;
+    result = [];
     if (!name) {
-      argumenten[0] = message + argumenten[0];
+      result.push(message);
+      result.push(argumenten[0]);
     } else {
       argumenten[0] = message;
+      _.each(argumenten, (function(_this) {
+        return function(argument) {
+          return result.push(argument);
+        };
+      })(this));
     }
-    console.log.apply(null, argumenten);
+    result.push('\033[0m');
+    console.log.apply(null, result);
     if (config.file) {
-      return logFile(name, message);
+      return logFile(name, argumenten);
     }
   };
 
@@ -149,7 +158,7 @@ Logger = (function() {
     return ('0' + time).slice(-2);
   };
 
-  logFile = function(name, message, argumenten) {
+  logFile = function(name, argumenten) {
     return console.log('Cannot log to file yet. Wait for version 0.2.0');
   };
 

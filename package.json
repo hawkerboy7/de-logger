@@ -1,6 +1,6 @@
 {
   "name": "de-logger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Log different types of events in the console with different colours and some alignment",
   "main": "build/server/app.js",
   "devDependencies": {
