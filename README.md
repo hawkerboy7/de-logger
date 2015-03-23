@@ -187,3 +187,36 @@ Make method func self aware. So if it is possible let the func method figure out
 
 ### Individual config
 Configure methodes individually (with regard to time, date and ms).
+
+### Name alignment
+Save the biggest name used and align all other messages to come to it's length
+
+```javascript
+log.info('name_smal', 'data');
+log.info('name_bigger', 'data');
+log.info('name', 'data');
+log.info('name_12', 'data');
+log.info('name_even_bigger', 'data');
+log.info('name_normal', 'data');
+log.info('name', 'data');
+```
+Current Output
+```
+info  name_smal - data
+info  name_bigger - data
+info  name - data
+info  name_12 - data
+info  name_even_bigger - data
+info  name_normal - data
+info  name - data
+```
+New output
+```
+info  name_smal - data
+info  name_bigger - data
+info  name        - data
+info  name_12     - data
+info  name_even_bigger - data
+info  name_normal      - data
+info  name             - data
+```
