@@ -41,11 +41,11 @@ Show the current time
 __whipe__ _true / false_
 This will also clear the console history
 
+___Do not show messages from a specific function___
+You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code.
+
 __terminal__ _true / false_
 Show messages in the terminal
-
-___Do not show messages from a specific function___ _ _
-You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code.
 
 ```javascript
 config = {
