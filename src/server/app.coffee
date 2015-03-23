@@ -27,5 +27,11 @@ config =
 	# Whipe history
 	whipe		: false
 
+	# Align message after name
+	align		: true
+
+	# Spacing in alignment
+	space		: 0
+
 
 module.exports = new Logger config

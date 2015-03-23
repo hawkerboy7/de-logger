@@ -8,7 +8,9 @@ config = {
   date: false,
   time: false,
   ms: false,
-  whipe: false
+  whipe: false,
+  align: true,
+  space: 0
 };
 
 module.exports = new Logger(config);

@@ -9,48 +9,16 @@ log.set({
 
 log.clear();
 
-log.func('func', {
-  a: 1
-});
+log.info('name_smal', 'data');
 
-log.debug('debug', {
-  a: 1
-}, {
-  b: 2
-});
+log.info('name_bigger', 'data');
 
-log.info('info', 'info', [1, 2, 3, 4]);
+log.info('name', 'data');
 
-log.event('event', 'event', 'event');
+log.info('name_12', 'data');
 
-log.warn('warn', 'warn', 'warn', 'warn');
+log.info('name_even_bigger', 'data');
 
-log.error('error', 'error', 'error', 'error', 'error');
+log.info('name_normal', 'data');
 
-log.set({
-  date: false,
-  func: {
-    display: false
-  },
-  debug: {
-    display: false
-  }
-});
-
-log.func('func', {
-  a: 1
-});
-
-log.debug('debug', {
-  a: 1
-}, {
-  b: 2
-});
-
-log.info('info hoi hoi');
-
-log.event('event');
-
-log.warn('warn', 'warn', 'warn', 'warn');
-
-log.error('error', 'error', 'error', 'error', 'error');
+log.info('name', 'data');

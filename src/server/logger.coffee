@@ -103,7 +103,28 @@ class Logger
 
 		# Add name
 		if name
+
 			message += `' \033[0m'` +name+ `'\033[037m'`
+
+			if config.align
+
+				# Get string length
+				length = name.length
+
+				# Check if the string's length is bigger than prevous length
+				config.space = length if length > config.space
+
+				# Count
+				i=0
+
+				# Add spaces for the missing length of the string
+				while i < (config.space-length)
+
+					# Add space
+					message += ' '
+
+					# Incease count
+					i++
 
 		# Determin space3
 		message += ' → ' if name

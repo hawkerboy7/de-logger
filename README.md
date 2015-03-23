@@ -43,6 +43,19 @@ This will also clear the console history
 __terminal__ _true / false_
 Show messages in the terminal
 
+__align__ _true / false_
+Will make sure the data logged after the name is in alignment with the largest name provided.
+```javascript
+info  Name_normal → First value
+info  Name_short  → Second value
+info  Name        → Third value
+info  Name_even_lager → Fourth value
+info  name_short      → Fifth value
+info  hi              → Sixth value
+```
+__space__ _int_
+The amount of characters the name area should contain. Default is 0 and grows whenever a name with a bigger length is provided, but you can choose to start with another number.
+
 ___Do not show messages from a specific function___<br>
 You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code.
 ```javascript
