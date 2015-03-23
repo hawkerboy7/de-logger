@@ -1,6 +1,6 @@
 {
   "name": "de-logger",
-  "version": "0.1.6-2",
+  "version": "0.1.6-3",
   "description": "Log different types of events in the node.js console with different colours and alignment",
   "main": "build/server/app.js",
   "author": "Dexter Esajas <dexter.esajas@gmail.com>",
