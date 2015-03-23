@@ -44,7 +44,7 @@ This will also clear the console history
 __terminal__ _true / false_
 Show messages in the terminal
 
-___Don't show messages from a specific function___
+__Don't show messages from a specific function__
 You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code.
 
 ```javascript
