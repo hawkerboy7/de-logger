@@ -77,7 +77,7 @@ Show errors
 
 
 ## Usage
-\* It basically works the same way as console.log() only it ads colours and formatting to the message. First agument should be the name of your choosing for the data you want to log. The rest of the arguments should be the data. You may also provide one argument containing data.
+\* It basically works the same way as console.log() only it ads colours and formatting to the messages. First agument should be the name of your choosing for the data you want to log. The rest of the arguments should be the data. You may also provide one argument containing data.
 
 
 ## Simple Example
@@ -182,9 +182,6 @@ Output
 
 ### Save log messages to a log file
 
-### Change the func method
-Make method func self aware. So if it is possible let the func method figure out the name of the function it is in.
-
 ### Individual config
 Configure methodes individually (with regard to time, date and ms).
 
@@ -220,3 +217,7 @@ info  name_even_bigger → data
 info  name_normal      → data
 info  name             → data
 ```
+
+### Change the func method
+~~Make method func self aware. So if it is possible let the func method figure out the name of the function it is in.~~
+This doesn't appear to be possible (in .coffee) since it only uses anonymous functions.
