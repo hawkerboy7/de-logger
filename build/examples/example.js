@@ -1,34 +1,31 @@
-var log;
+var data1, data2, log;
 
 log = require('../server/app');
 
 log.set({
-  date: true,
   whipe: true
 });
 
 log.clear();
 
-log.func('func', {
-  a: 1
-});
+data1 = {
+  a: 1,
+  b: 2,
+  c: 3
+};
 
-log.debug('debug', {
-  a: 1
-}, {
-  b: 2
-});
+data2 = {
+  a: 4,
+  b: 5,
+  c: 6
+};
 
-log.info('info', 'info', [1, 2, 3, 4]);
+log.func('First function');
 
-log.event('event', 'event', 'event');
-
-log.warn('warn', 'warn', 'warn', 'warn');
-
-log.error('error', 'error', 'error', 'error', 'error');
+log.debug('Debugging', 'Debug message', data1);
 
 log.set({
-  date: false,
+  time: true,
   func: {
     display: false
   },
@@ -37,20 +34,37 @@ log.set({
   }
 });
 
-log.func('func', {
-  a: 1
+log.func('First function');
+
+log.debug('Debugging', 'Debug message', data1);
+
+log.info('Webserver', 'Running at port: 8000');
+
+log.event('Gui input', data2);
+
+log.set({
+  date: true,
+  func: {
+    display: false
+  },
+  debug: {
+    display: false
+  }
 });
 
-log.debug('debug', {
-  a: 1
-}, {
-  b: 2
+log.warn('Usermodel', 'Cannot find a user id');
+
+log.error('Mongodb', 'Connection with mongodb couldn\'t be established');
+
+log.set({
+  time: false
 });
 
-log.info('info');
+log.info(data1);
 
-log.event('event');
+log.set({
+  time: true,
+  ms: true
+});
 
-log.warn('warn', 'warn', 'warn', 'warn');
-
-log.error('error', 'error', 'error', 'error', 'error');
+log.event(data2);

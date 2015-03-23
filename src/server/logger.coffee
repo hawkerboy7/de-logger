@@ -61,7 +61,7 @@ class Logger
 	# --------------------------
 	check = (name) -> config.terminal and (config[name]?.display isnt false)
 
-	prep = (argumenten, color, functionName) ->
+	prep = (argumenten,color,functionName) ->
 
 		# Don't to anything if arguments are not provided
 		return unless argumenten[0]
@@ -70,7 +70,7 @@ class Logger
 		name	= ''
 		message	= ''
 
-		if argumenten[1] and typeof argumenten[0] is 'string'
+		if !!(argumenten[1] and typeof argumenten[0] is 'string')
 			name = argumenten[0]
 
 		# Start of time in black
@@ -99,11 +99,11 @@ class Logger
 			message += '  '
 
 		# Add function name in color
-		message += `'\033['` +color+functionName+ `'\033[0m  '`
+		message += `'\033['` +color+functionName+ `'\033[0m'`
 
 		# Add name
 		if name
-			message += `'\033[37m'` +name+ `'\033[0m'`
+			message += `' \033[0m'` +name+ `'\033[037m'`
 
 		# Determin space3
 		message += ' -' if name
@@ -112,18 +112,26 @@ class Logger
 		log name, message, argumenten
 
 
-	log = (name,message, argumenten) ->
+	log = (name,message,argumenten) ->
+
+		result = []
 
 		unless name
-			argumenten[0] = message+argumenten[0]
+			result.push message
+			result.push argumenten[0]
 		else
 			argumenten[0] = message
 
+			_.each argumenten, (argument) => result.push argument
+
+		# Turn color back to white
+		result.push `'\033[0m'`
+
 		# Send the arguments to console log
-		console.log.apply null, argumenten
+		console.log.apply null, result
 
 		# Add message to a log file
-		logFile name, message if config.file
+		logFile name, argumenten if config.file
 
 
 	getDate = ->
@@ -161,7 +169,7 @@ class Logger
 		('0'+time).slice(-2)
 
 
-	logFile = (name,message, argumenten) ->
+	logFile = (name,argumenten) ->
 		console.log 'Cannot log to file yet. Wait for version 0.2.0'
 
 
