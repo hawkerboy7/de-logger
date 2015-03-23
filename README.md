@@ -11,7 +11,6 @@ Require de-logger in your project
 var log = require('de-logger');
 ```
 
-
 ## API
 
 ### set({config})
@@ -21,11 +20,13 @@ Change the default configuration by providing a config object. This can be done 
 ```javascript
 // Default config
 config = {
-  ms:		false,
-  date:		false,
-  time:		false,
-  whipe:	false
-  terminal:	true
+  ms:       false,
+  date:     false,
+  time:     false,
+  whipe:    false
+  align:    true
+  space:    0
+  terminal: true
 };
 ```
 __ms__ _true / false_
@@ -197,39 +198,6 @@ Output
 
 ### Individual config
 Configure methodes individually (with regard to time, date and ms).
-
-### Name alignment
-Save the biggest name used and align all other messages to come to it's length
-
-```javascript
-log.info('name_smal', 'data');
-log.info('name_bigger', 'data');
-log.info('name', 'data');
-log.info('name_12', 'data');
-log.info('name_even_bigger', 'data');
-log.info('name_normal', 'data');
-log.info('name', 'data');
-```
-Current Output
-```
-info  name_smal → data
-info  name_bigger → data
-info  name → data
-info  name_12 → data
-info  name_even_bigger → data
-info  name_normal → data
-info  name → data
-```
-New output
-```
-info  name_smal → data
-info  name_bigger → data
-info  name        → data
-info  name_12     → data
-info  name_even_bigger → data
-info  name_normal      → data
-info  name             → data
-```
 
 ### Change the func method
 ~~Make method func self aware. So if it is possible let the func method figure out the name of the function it is in.~~
