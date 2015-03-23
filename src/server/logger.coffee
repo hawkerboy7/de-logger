@@ -1,5 +1,10 @@
 # --------------------------------------------------
-# Global variable
+# NPM module
+# --------------------------------------------------
+_ = require 'underscore'
+
+# --------------------------------------------------
+# "Global" variable
 # --------------------------------------------------
 config = {}
 
@@ -8,135 +13,147 @@ config = {}
 # --------------------------------------------------
 class Logger
 
-	constructor: (conf) ->
+	constructor: (con) ->
 
-		# Make the config globally available
-		config = conf
-
-		# Completely block the log
-		return unless config.on
-
-		# Check if users wants to be notified
-		if config.global.notify
-
-			# Notify if globals are being used or not
-			if config.global.use
-				console.log `'\033[32minfo\033[0m:\t'` + 'Time will be displayed the same for each function!\n'
-			else
-				console.log `'\033[32minfo\033[0m:\t'` + 'Time will be displayed on individual basis!\n'
-
+		# Make the config available in this script
+		config = con
 
 	# --------------------------
 	#	Public log functions
 	# --------------------------
+	clear: ->
+		if config.clear
+			# Clear and wipe history
+			console.log `'\033c'`
+		else
+			# Clear and mantain history
+			console.log `'\u001b[2J\u001b[0;0H'`
+
+	func: ->
+		return unless check 'func'
+		prep arguments, '35m', 'func '
+
+	debug: ->
+		return unless check 'debug'
+		prep arguments, '34m', 'debug'
+
+	info: ->
+		return unless check 'info'
+		prep arguments, '32m', 'info '
+
+	event: ->
+		return unless check 'event'
+		prep arguments, '36m', 'event'
+
+	warn: ->
+		return unless check 'warn'
+		prep arguments, '33m', 'warn '
+
+	error: ->
+		return unless check 'error'
+		prep arguments, '31m', 'error'
+
 	set: (settings) ->
-		@error 'Cannot set Properties yet :('
-		# mergeRecursive config, settings
-
-	error: (type, msg) ->
-		prep type, msg, '31m', 'error'	if config.error.display
-
-	info: (type,msg) ->
-		prep type, msg, '32m', 'info'	if config.info.display
-
-	func: (type,msg) ->
-		prep type, msg, '34m', 'func'	if config.func.display
-
-	event: (type,msg) ->
-		prep type, msg, '36m', 'event'	if config.event.display
-
-	warn: (type, msg) ->
-		prep type, msg, '33m', 'warn'	if config.warn.display
-
-	clear: -> console.log `'\u001b[2J\u001b[0;0H'`
-
+		_.extend config, settings
 
 	# --------------------------
 	#	Private helper functions
 	# --------------------------
-	prep = (type, msg, color, name) ->
+	check = (name) -> config.terminal and (config[name]?.display isnt false)
 
-		return unless config.on
+	prep = (argumenten, color, functionName) ->
 
-		space = '   '
+		# Don't to anything if arguments are not provided
+		return unless argumenten[0]
 
-		# Allow for msg-only calls aswell
-		unless msg?
-			msg		= space + type
-			type	= ''
+		set		= 0
+		name	= ''
+		message	= ''
+
+		if argumenten[1] and typeof argumenten[0] is 'string'
+			name = argumenten[0]
+
+		# Start of time in black
+		message += `'\033[30m'` if config.date or config.time
+
+		if config.date
+			set += 1
+			message += getDate()
+
+		if config.time
+			if set
+				message += ' '
+
+			set += 2
+			message += getTime()
+
+		if config.time and config.ms
+			set		+= 4
+			message	+= getMs()
+
+		# End of time color
+		message += `'\033[0m'` if config.date or config.time
+
+		# Determin space
+		if set
+			message += '  '
+
+		# Add function name in color
+		message += `'\033['` +color+functionName+ `'\033[0m  '`
+
+		# Add name
+		if name
+			message += `'\033[37m'` +name+ `'\033[0m'`
+
+		# Determin space3
+		message += ' -' if name
+
+		# Head to log
+		log name, message, argumenten
+
+
+	log = (name,message, argumenten) ->
+
+		unless name
+			argumenten[0] = message+argumenten[0]
 		else
-			tab = '\t'
-			if type.length < 5
-				tab = '     \t'
-			type = space + type + tab
+			argumenten[0] = message
 
-		# Allow for objects and arrays as well
-		if typeof msg is 'array' or typeof msg is 'object'
+		# Send the arguments to console log
+		console.log.apply null, argumenten
 
-			# Send to logMe with an array or object as well
-			return logMe(`'\033['` +color+name+ `'\033[0m:\t'` + getTime(name) + type, msg)
-
-		# Send to logMe
-		logMe(`'\033['` +color+name+ `'\033[0m:\t'` + getTime(name) + type + msg)
+		# Add message to a log file
+		logFile name, message if config.file
 
 
-	getTime = (name) ->
+	getDate = ->
 
-		# Get time now
+		# Get DateTime
 		time = new Date
 
-		# Check if global setting should be used
-		if config.global.use
-
-			# Check if time is need acoording to global
-			return '' unless config.global.time.show
-
-			# Return time
-			return makeTime time unless config.global.time.date
-
-			# Return date and time
-			return makeDateTime time
-
-		# Check if time is needed
-		return '' unless config[name].time.show
-
-		# Return time
-		return makeTime time unless config[name].time.date
-
-		# Return date and time
-		makeDateTime time
+		# Return date in nice format
+		return	lead(time.getDate())+'-'+
+				lead(time.getMonth()+1)+'-'+
+				time.getFullYear()
 
 
-	# Only time
-	makeTime = (time) ->
-		return	lead(time.getHours())			+ ':' +
-				lead(time.getMinutes())			+ ':' +
+	getTime = ->
+
+		# Get DateTime
+		time = new Date
+
+		# Return time in nice format
+		return	lead(time.getHours())+':'+
+				lead(time.getMinutes())+':'+
 				lead(time.getSeconds())
 
 
-	# Complete datetime
-	makeDateTime = (time) ->
-		return	lead(time.getDate())			+ '-' +
-				lead(time.getMonth()+1)			+ '-' +
-				lead(time.getFullYear())		+ ' ' +
-				lead(time.getHours()) 			+ ':' +
-				lead(time.getMinutes())			+ ':' +
-				lead(time.getSeconds())			+ '.' +
-				lead(time.getMilliseconds())	+ ' '
+	getMs = ->
+		# Get DateTime
+		time = new Date
 
-
-	# Check if msg needs to be stored and or "console.log-ed"
-	logMe = (msg,obj) ->
-		unless obj
-			logFile msg					if config.store
-			console.log msg				if config.terminal
-		else
-			logFile msg, obj			if config.store
-			console.log msg, obj		if config.terminal
-
-
-	logFile = (msg) ->
-		console.log 'Store in file'
+		# Return miliseconds in nice format
+		return	'.'+lead(time.getMilliseconds())
 
 
 	# Add a leading 0 to time
@@ -144,23 +161,8 @@ class Logger
 		('0'+time).slice(-2)
 
 
-	# Merge two objects correctly (doesn't work correctly yet)
-	mergeRecursive = (obj1, obj2) ->
-
-		for p of obj2
-
-			try
-				# Property in destination object set; update its value.
-				if obj2[p].constructor is Object
-					obj1[p] = MergeRecursive(obj1[p], obj2[p])
-				else
-					obj1[p] = obj2[p]
-			catch e
-
-				# Property in destination object not set; create it and set its value.
-				obj1[p] = obj2[p]
-
-			obj1
+	logFile = (name,message, argumenten) ->
+		console.log 'Cannot log to file yet. Wait for version 0.2.0'
 
 
 

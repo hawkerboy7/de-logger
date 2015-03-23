@@ -9,53 +9,23 @@ Logger = require './logger'
 # --------------------------------------------------
 config =
 
-	# Turn on or off completely
-	on				: true
-
 	# Show in terminal
-	terminal		: true
+	terminal	: true
 
-	# Store log
-	store			: false
+	# Store in file
+	file		: false
 
-	# Global settings
-	global:
-		use			: true
-		notify		: false
-		time:
-			show	: false
-			date	: false
+	# Show date
+	date		: false
 
-	error:
-		display		: true
-		time:
-			show	: true
-			date	: false
+	# Show time
+	time		: false
 
-	info:
-		display		: true
-		time:
-			show	: true
-			date	: false
+	# Show ms
+	ms			: false
 
-	func:
-		display		: true
-		time:
-			show	: true
-			date	: false
-
-	event:
-		display		: true
-		time:
-			show	: true
-			date	: false
-
-	warn:
-		display		: true
-		time:
-			show	: true
-			date	: false
-
+	# Whipe history
+	whipe		: false
 
 
 module.exports = new Logger config
