@@ -47,13 +47,13 @@ info  Name_even_lager → Fourth value    // space = 15
 info  name_short      → Fifth value     // space = 15
 info  hi              → Sixth value     // space = 15
 ```
-__space__     _int_    _ _
+__space__ _int_
 The amount of characters the name area should contain. Default is 0 and grows whenever a name with a bigger length is provided (as is shown in the example above), but you can choose to start with another number.
 
-__whipe__     _true / false_
+__whipe__ _true / false_
 This will also clear the console history
 
-__terminal__  _true / false_
+__terminal__ _true / false_
 Show messages in the terminal
 
 ___Do not show messages from a specific function___<br>
