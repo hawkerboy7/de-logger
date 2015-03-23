@@ -45,7 +45,9 @@ __terminal__ _true / false_
 Show messages in the terminal
 
 ___Don't show messages from a specific function___
+
 You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code.
+
 ```javascript
 config = {
   func:
@@ -159,7 +161,7 @@ debug Debugging - Debug message { a: 1, b: 2, c: 3 }
 23-03-2015 09:19:28  warn  Usermodel - Cannot find a user id
 23-03-2015 09:19:28  error Mongodb - Connection with mongodb couldn't be established
 ```
-You can still provide your data only argument
+You can still provide your data as the only argument
 ```javascript
 log.set({
   date: true,
