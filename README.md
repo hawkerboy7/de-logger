@@ -12,7 +12,6 @@ var log = require('de-logger');
 ```
 
 
-
 ## API
 
 ### set({config})
@@ -56,7 +55,7 @@ config = {
 ```
 
 ### clear()
-Clears the console, based on your config your console scroll history will be wiped too.
+Clears the console. Based on your config your console scroll history will be wiped too.
 
 ### func(*)
 Identifing which function is triggered (suppling the function name is still required for now)
@@ -77,10 +76,8 @@ Show warnings
 Show errors
 
 
-
 ## Usage
 \* It basically works the same way as console.log() only it ads colours and formatting to the message. First agument should be the name of your choosing for the data you want to log. The rest of the arguments should be the data. You may also provide one argument containing data.
-
 
 
 ## Simple Example
@@ -93,7 +90,6 @@ Simple output
 ```
 info  Name - Running at port: 8000
 ```
-
 
 
 ## Big Example
@@ -191,3 +187,36 @@ Make method func self aware. So if it is possible let the func method figure out
 
 ### Individual config
 Configure methodes individually (with regard to time, date and ms).
+
+### Name alignment
+Save the biggest name used and align all other messages to come to it's length
+
+```javascript
+log.info('name_smal', 'data');
+log.info('name_bigger', 'data');
+log.info('name', 'data');
+log.info('name_12', 'data');
+log.info('name_even_bigger', 'data');
+log.info('name_normal', 'data');
+log.info('name', 'data');
+```
+Current Output
+```
+info  name_smal - data
+info  name_bigger - data
+info  name - data
+info  name_12 - data
+info  name_even_bigger - data
+info  name_normal - data
+info  name - data
+```
+New output
+```
+info  name_smal - data
+info  name_bigger - data
+info  name        - data
+info  name_12     - data
+info  name_even_bigger - data
+info  name_normal      - data
+info  name             - data
+```
