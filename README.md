@@ -46,12 +46,12 @@ Show messages in the terminal
 ___Do not show messages from a specific function___<br>
 You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code.
 ```javascript
-config = {
+log.set({
   func:
     display: false
   event:
     display: false
-};
+});
 ```
 
 ### clear()
