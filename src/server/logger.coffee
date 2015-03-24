@@ -1,12 +1,15 @@
 # --------------------------------------------------
-# NPM module
+# NPM / Node modules
 # --------------------------------------------------
-_ = require 'underscore'
+_		= require 'underscore'
+file	= require './file'
 
 # --------------------------------------------------
-# "Global" variable
+# "Global" variables
 # --------------------------------------------------
+self = null
 config = {}
+stream = null
 
 # --------------------------------------------------
 # Logger Module
@@ -17,6 +20,13 @@ class Logger
 
 		# Make the config available in this script
 		config = con
+
+		# Make reference to the this scope
+		self = @
+
+		# Create file to write log messages to
+		file.build()
+
 
 	# --------------------------
 	#	Public log functions
@@ -55,6 +65,7 @@ class Logger
 
 	set: (settings) ->
 		_.extend config, settings
+
 
 	# --------------------------
 	#	Private helper functions
@@ -191,7 +202,7 @@ class Logger
 
 
 	logFile = (name,argumenten) ->
-		console.log 'Cannot log to file yet. Wait for version 0.2.0'
+		# console.log 'Cannot log to file yet. Wait for version 0.2.0'
 
 
 

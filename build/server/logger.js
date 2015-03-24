@@ -1,14 +1,24 @@
-var Logger, _, config;
+var Logger, _, config, fs, path, self, stream;
 
 _ = require('underscore');
 
+fs = require('fs');
+
+path = require('path');
+
+self = null;
+
 config = {};
 
+stream = null;
+
 Logger = (function() {
-  var check, getDate, getMs, getTime, lead, log, logFile, prep;
+  var build, check, getDate, getMs, getTime, lead, log, logFile, prep;
 
   function Logger(con) {
     config = con;
+    self = this;
+    build();
   }
 
   Logger.prototype.clear = function() {
@@ -169,8 +179,21 @@ Logger = (function() {
     return ('0' + time).slice(-2);
   };
 
-  logFile = function(name, argumenten) {
-    return console.log('Cannot log to file yet. Wait for version 0.2.0');
+  logFile = function(name, argumenten) {};
+
+  build = function() {
+    var dir, pointer;
+    if (!config.file) {
+      return;
+    }
+    pointer = '../../';
+    dir = path.resolve(__dirname, pointer + config.file.path);
+    return fs.mkdir(dir, function(e) {
+      if (e) {
+        return self.error('Build directory', e);
+      }
+      return self.info('Build directory', 'Was succefull', dir);
+    });
   };
 
   return Logger;
