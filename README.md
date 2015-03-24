@@ -160,7 +160,7 @@ debug Debugging → Debug message { a: 1, b: 2, c: 3 }
 09:19:28  info  Webserver → Running at port: 8000
 09:19:28  event Gui input → { a: 4, b: 5, c: 6 }
 23-03-2015 09:19:28  warn  Usermodel → Cannot find a user id
-23-03-2015 09:19:28  error Mongodb → Connection with mongodb couldn't be established
+23-03-2015 09:19:28  error Mongodb   → Connection with mongodb couldn't be established
 ```
 You can still provide your data as the only argument
 ```javascript
