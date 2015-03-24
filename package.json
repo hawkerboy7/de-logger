@@ -1,6 +1,6 @@
 {
   "name": "de-logger",
-  "version": "0.1.6-4",
+  "version": "0.1.6-5",
   "description": "Log different types of events in the node.js console with different colors and alignment",
   "main": "build/server/app.js",
   "author": "Dexter Esajas <dexter.esajas@gmail.com>",
@@ -10,10 +10,10 @@
   },
   "repository" : {
     "type" : "git",
-    "url" : "https://github.com/hawkerboy7/logger"
+    "url" : "https://github.com/hawkerboy7/de-logger"
   },
   "bugs": {
-    "url": "https://github.com/hawkerboy7/logger/issues",
+    "url": "https://github.com/hawkerboy7/de-logger/issues",
     "email" : "dexter.esajas@gmail.com"
   }
 }
