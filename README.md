@@ -60,8 +60,8 @@ ___Do not show messages from a specific function___<br>
 You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code.
 ```javascript
 log.set({
-  "func":  { display: false }
-  "event": { display: false }
+  "func":  { "display": false }
+  "event": { "display": false }
 });
 ```
 
@@ -110,21 +110,21 @@ var data1, data2, log;
 log = require('de-logger');
 
 log.set({
-  whipe: true
+  "whipe": true
 });
 
 log.clear();
 
 data1 = {
-  a: 1,
-  b: 2,
-  c: 3
+  "a": 1,
+  "b": 2,
+  "c": 3
 };
 
 data2 = {
-  a: 4,
-  b: 5,
-  c: 6
+  "a": 4,
+  "b": 5,
+  "c": 6
 };
 
 log.func('First function');
@@ -132,13 +132,9 @@ log.func('First function');
 log.debug('Debugging', 'Debug message', data1);
 
 log.set({
-  time: true,
-  func: {
-    display: false
-  },
-  debug: {
-    display: false
-  }
+  "time": true,
+  "func": { "display": false },
+  "debug": { "display": false }
 });
 
 log.func('First function');
@@ -150,7 +146,7 @@ log.info('Webserver', 'Running at port: 8000');
 log.event('Gui input', data2);
 
 log.set({
-  date: true,
+  "date": true,
 });
 
 log.warn('Usermodel', 'Cannot find a user id');
@@ -169,15 +165,15 @@ debug Debugging → Debug message { a: 1, b: 2, c: 3 }
 You can still provide your data as the only argument
 ```javascript
 log.set({
-  date: true,
-  time: false
+  "date": true,
+  "time": false
 });
 
 log.info(data1);
 
 log.set({
-  time: true,
-  ms: true
+  "time": true,
+  "ms": true
 });
 
 log.event(data2);
