@@ -6,27 +6,44 @@ Install de-logger using npm install
 npm install de-logger --save
 ```
 
-Require de-logger in your project
+Require _de-logger_ in your project and you're ready to go!
 ```javascript
 var log = require('de-logger');
 ```
 
+## Example 1
+The examples are written in coffeescript. For an example in javascript check the [examples folder](https://github.com/hawkerboy7/de-logger/tree/master/build/examples).
+```coffeescript
+log = require 'de-logger'
+
+log.func  'Func' , 'These'
+log.debug 'Debug', 'are'
+log.info  'Info' , 'all the'
+log.event 'Event', 'basic'
+log.warn  'Warn' , 'log'
+log.error 'Error', 'commands'
+```
+![basics](https://cloud.githubusercontent.com/assets/2284480/6832640/1208953c-d328-11e4-8cba-07487507eade.png)
+
 ## API
 
 ### set({config})
-Change the default configuration by providing a config object. This can be done at any time during you project and multiple times. This way data in your project can be logged differently at any point in your project.
+Change the default configuration by providing a config object ([example 2](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)). This can be done at any time during you project and multiple times. This way data in your project can be logged differently at any point in your project.
 
-```javascript
-// default config
-config = {
-  "ms":       false,
-  "date":     false,
-  "time":     false,
-  "align":    true,
-  "space":    0,
-  "whipe":    false,
-  "terminal": true
-};
+```coffeescript
+# Default config
+log = require 'de-logger'
+
+config =
+  ms:     false
+  date:   false
+  time:   false
+  align:    true
+  space:    0
+  whipe:    false
+  terminal: true
+
+log.set config
 ```
 __ms__ _true / false_
 Add miliseconds to time (only works if time is true)
@@ -48,7 +65,7 @@ Will make sure the data logged after the name is in alignment with the largest n
 [green] info  hi              → Sixth value     // space = 15
 ```
 __space__ _int_
-The amount of characters the name area should contain. Default is 0 and grows whenever a name with a bigger length is provided (as is shown in the example above), but you can choose to start with another number.
+The amount of characters the name area should contain. Default is 0 and grows whenever a name with a bigger length is provided (as is shown in the example above) but you can choose to start with another number.
 
 __whipe__ _true / false_
 This will also clear the console history
@@ -59,10 +76,11 @@ Show messages in the terminal
 ___Do not show messages from a specific function___<br>
 You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code.
 ```javascript
-log.set({
-  "func":  { "display": false }
-  "event": { "display": false }
-});
+log.set
+  func:
+    display: false
+  event:
+    display: false
 ```
 
 ### clear()
@@ -86,19 +104,11 @@ Show warnings
 ### error(*)
 Show errors
 
+* The arguments that should be provided are explained in [Usage](https://github.com/hawkerboy7/de-logger#usage).
+
 
 ## Usage
 \* It basically works the same way as console.log() only it ads colours and formatting to the messages. First agument should be the name of your choosing for the data you want to log. The rest of the arguments should be the data. You may also provide one argument containing data.
-
-
-## Simple Example
-```javascript
-var log = require('de-logger');
-var port = 8000;
-log.info('Name','Running at port:', port);
-```
-Simple output<br>
-![somewhere](https://cloud.githubusercontent.com/assets/2284480/6828387/cce1e6a8-d30d-11e4-931a-8c55717163b7.png)
 
 
 ## Big Example
