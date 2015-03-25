@@ -1,3 +1,4 @@
+# log = require 'de-logger'
 log = require '../server/app'
 
 log.set

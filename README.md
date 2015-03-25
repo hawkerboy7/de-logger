@@ -35,9 +35,9 @@ Change the default configuration by providing a config object ([example 2](https
 log = require 'de-logger'
 
 config =
-  ms:     false
-  date:   false
-  time:   false
+  ms:       false
+  date:     false
+  time:     false
   align:    true
   space:    0
   whipe:    false
@@ -135,7 +135,7 @@ log.debug 'Debugging', 'Debug message', data1
 # (Re)set config
 log.set
 
-  # Also show time
+  # Show time
   time: true
 
   # Turn off func and debug messages
@@ -145,43 +145,48 @@ log.set
     display: false
 
 # Log a function, debug, info and event message
-log.func 'First function'                       # This will not be displayed due to the config on line 19
-log.debug 'Debugging', 'Debug message', data1   # This will not be displayed due to the config on line 19
+log.func 'First function'             # This will not be displayed
+log.debug 'Debugging', 'Debug message', data1   # This will not be displayed
 log.info 'Webserver', 'Running at port: 8000'
 log.event 'Gui input', data2
 
-
-# (Re)Set config
+# (Re)set config
 log.set
 
-  # Also show date
+  # Show date
   date: true
 
 # Log a warning and an error
 log.warn 'Usermodel', 'Cannot find a user id'
-log.error 'Mongodb', 'Connection with mongodb couldn\'t be established'
+log.error 'Mongodb', 'Connection couldn\'t be established'
 ```
-![second](https://cloud.githubusercontent.com/assets/2284480/6828406/f01f685c-d30d-11e4-9f12-9db3fa97743c.png)
+![example 4](https://cloud.githubusercontent.com/assets/2284480/6836823/25cb4d30-d346-11e4-849b-497d6dc1948c.png)
 
 You can still provide your data as the only argument
 ```coffeescript
-log.set({
-  "date": true,
-  "time": false
-});
+log = require 'de-logger'
+
+data1 =
+  a: 1
+  b: 2
+  c: 3
+
+data2 =
+  a: 4
+  b: 5
+  c: 6
 
 log.info(data1);
 
-log.set({
-  "time": true,
-  "ms": true
-});
+# (Re)Set config
+log.set
+  time: true
+  ms: true
 
 log.event(data2);
 ```
 Output<br>
-![third](https://cloud.githubusercontent.com/assets/2284480/6828421/0bf90394-d30e-11e4-9b39-62adfdb8bd74.png)
-
+![example5](https://cloud.githubusercontent.com/assets/2284480/6837069/6c486368-d348-11e4-8ef2-82ac81920c5e.png)
 
 
 ## Planned Features
@@ -192,5 +197,4 @@ Output<br>
 Configure methodes individually (with regard to time, date and ms).
 
 ### Change the func method
-~~Make method func self aware. So if it is possible let the func method figure out the name of the function it is in.~~
-This doesn't appear to be possible (in .coffee) since it only uses anonymous functions.
+~~Make method func self aware. So if it is possible let the func method figure out the name of the function it is in.~~ This doesn't appear to be possible (in .coffee) since it only uses anonymous functions.

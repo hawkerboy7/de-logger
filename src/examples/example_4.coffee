@@ -19,7 +19,7 @@ log.debug 'Debugging', 'Debug message', data1
 # (Re)set config
 log.set
 
-	# Also show time
+	# Show time
 	time: true
 
 	# Turn off func and debug messages
@@ -29,18 +29,17 @@ log.set
 		display: false
 
 # Log a function, debug, info and event message
-log.func 'First function'							# This will not be displayed due to the config on line 19
-log.debug 'Debugging', 'Debug message', data1		# This will not be displayed due to the config on line 19
+log.func 'First function'							# This will not be displayed
+log.debug 'Debugging', 'Debug message', data1		# This will not be displayed
 log.info 'Webserver', 'Running at port: 8000'
 log.event 'Gui input', data2
-
 
 # (Re)set config
 log.set
 
-	# Also show date
+	# Show date
 	date: true
 
 # Log a warning and an error
 log.warn 'Usermodel', 'Cannot find a user id'
-log.error 'Mongodb', 'Connection with mongodb couldn\'t be established'
+log.error 'Mongodb', 'Connection couldn\'t be established'
