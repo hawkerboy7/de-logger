@@ -97,7 +97,7 @@ var log = require('de-logger');
 var port = 8000;
 log.info('Name','Running at port:', port);
 ```
-Simple output
+Simple output<br>
 ![somewhere](https://cloud.githubusercontent.com/assets/2284480/6828387/cce1e6a8-d30d-11e4-931a-8c55717163b7.png)
 
 
@@ -151,7 +151,7 @@ log.warn('Usermodel', 'Cannot find a user id');
 
 log.error('Mongodb', 'Connection with mongodb couldn\'t be established');
 ```
-Big Output
+Big Output<br>
 ![second](https://cloud.githubusercontent.com/assets/2284480/6828406/f01f685c-d30d-11e4-9f12-9db3fa97743c.png)
 
 You can still provide your data as the only argument
@@ -170,7 +170,7 @@ log.set({
 
 log.event(data2);
 ```
-Output
+Output<br>
 ![third](https://cloud.githubusercontent.com/assets/2284480/6828421/0bf90394-d30e-11e4-9b39-62adfdb8bd74.png)
 
 
