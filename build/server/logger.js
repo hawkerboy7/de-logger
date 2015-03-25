@@ -11,7 +11,7 @@ config = {};
 stream = null;
 
 Logger = (function() {
-  var check, getDate, getMs, getTime, lead, log, logFile, prep;
+  var check, getDate, getMs, getTime, lead, log, prep;
 
   function Logger(con) {
     config = con;
@@ -149,7 +149,10 @@ Logger = (function() {
       })(this));
     }
     result.push('\033[0m');
-    return console.log.apply(null, result);
+    console.log.apply(null, result);
+    if (!file.disabled) {
+      return file.log(name, argumenten);
+    }
   };
 
   getDate = function() {
@@ -173,8 +176,6 @@ Logger = (function() {
   lead = function(time) {
     return ('0' + time).slice(-2);
   };
-
-  logFile = function(name, argumenten) {};
 
   return Logger;
 

@@ -13,7 +13,7 @@ file = null;
 config = null;
 
 File = (function() {
-  var createFolder, makeStream;
+  var createFolder, createStream, makeNext;
 
   function File() {}
 
@@ -24,33 +24,46 @@ File = (function() {
       return;
     }
     return createFolder(function(status) {
-      return console.log('status', status);
+      var disabled;
+      if (status) {
+        return disabled = true;
+      }
+      return createStream(function(res) {
+        return console.log('stream', res);
+      });
     });
   };
 
+  File.prototype.log = function() {};
+
   createFolder = function(cb) {
-    var dir, dirPath, folders, pointer;
+    var dirPath, folders, i, pointer;
     pointer = __dirname + '/../..';
     folders = config.file.path.split("/");
     dirPath = pointer;
-    _.each(folders, function(folder, i) {
-      var folderPath;
-      dirPath += '/' + folder;
-      folderPath = path.resolve(dirPath);
-      return fs.mkdir(folderPath, function(e) {
-        if (e && e.code !== 'EEXIST') {
-          cb(false);
-        }
-        if ((folders.length - 1) === i) {
-          return cb(true);
-        }
-      });
-    });
-    return dir = path.resolve(__dirname, pointer + config.file.path);
+    i = 0;
+    return makeNext(folders, dirPath, i, cb);
   };
 
-  makeStream = function() {
-    return console.log('makeStream');
+  makeNext = function(folders, dirPath, i, cb) {
+    var folderPath;
+    dirPath += '/' + folders[i];
+    folderPath = path.resolve(dirPath);
+    return fs.mkdir(folderPath, function(e) {
+      if (e && e.code !== 'EEXIST') {
+        cb(false);
+      }
+      if ((folders.length - 1) === i) {
+        return cb(true);
+      } else {
+        i++;
+        return makeNext(folders, dirPath, i, cb);
+      }
+    });
+  };
+
+  createStream = function() {
+    return console.log('createStream');
   };
 
   return File;

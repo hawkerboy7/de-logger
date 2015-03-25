@@ -30,7 +30,17 @@ class File
 		# Creates the folder in which to store log files
 		createFolder (status) ->
 
-			console.log 'status', status
+			# Disable the log->file since the file path couldn't be made
+			return disabled = true if status
+
+			# Create log write stream
+			createStream (res) ->
+
+				console.log 'stream', res
+
+	log: ->
+		# console.log 'hoi'
+
 
 
 	# --------------------------
@@ -48,35 +58,46 @@ class File
 		# Directory path
 		dirPath = pointer
 
-		# Create each folder to create the path
-		_.each folders, (folder, i) ->
+		# Count
+		i = 0
 
-			# Add new folder to the path
-			dirPath += '/'+folder
-
-			# Create a valid folder path
-			folderPath = path.resolve dirPath
-
-			# Create folder
-			fs.mkdir folderPath, (e) ->
-
-				# Directory was made or directory already exists so it has been made already
-				if e and e.code isnt 'EEXIST'
-
-					# Cannot make this folder / path
-					cb false
-
-				# Go to next directory or it's finished
-				cb true if (folders.length-1) is i
-
-		# Create path of directory
-		dir = path.resolve __dirname, pointer+config.file.path
+		# Make folders
+		makeNext folders, dirPath, i, cb
 
 
+	makeNext = (folders, dirPath, i, cb) ->
 
-	makeStream = ->
+		# Add new folder to the path
+		dirPath += '/'+folders[i]
 
-		console.log 'makeStream'
+		# Create a valid folder path
+		folderPath = path.resolve dirPath
+
+		# Create folder
+		fs.mkdir folderPath, (e) ->
+
+			# Directory was made or directory already exists so it has been made already
+			if e and e.code isnt 'EEXIST'
+
+				# Cannot make this folder / path
+				cb false
+
+			# Have all directories been made?
+			if (folders.length-1) is i
+
+				return cb true
+
+			else
+				# Increase count
+				i++
+
+				# Make next folder
+				makeNext folders, dirPath, i, cb
+
+
+	createStream = ->
+
+		console.log 'createStream'
 
 
 

@@ -164,7 +164,7 @@ class Logger
 		console.log.apply null, result
 
 		# Add message to a log file
-		# file.log name, argumenten if config.made
+		file.log name, argumenten unless file.disabled
 
 
 	getDate = ->
@@ -200,10 +200,6 @@ class Logger
 	# Add a leading 0 to time
 	lead = (time) ->
 		('0'+time).slice(-2)
-
-
-	logFile = (name,argumenten) ->
-		# console.log 'Cannot log to file yet. Wait for version 0.2.0'
 
 
 
