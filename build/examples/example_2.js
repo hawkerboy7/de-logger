@@ -1,6 +1,6 @@
 var config, log;
 
-log = require('../server/app');
+log = require('de-logger');
 
 config = {
   ms: false,
