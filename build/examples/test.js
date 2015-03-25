@@ -2,13 +2,6 @@ var log;
 
 log = require('../server/app');
 
-log.set({
-  date: true,
-  whipe: true
-});
-
-log.clear();
-
 log.info('name_smal', 'data');
 
 log.info('name_bigger', 'data');
