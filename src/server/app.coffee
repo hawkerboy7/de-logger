@@ -17,10 +17,10 @@ config =
 	file :
 
 		# Path where the file needs to be stored
-		path: 'logs/lol'
+		path: 'logs/kan/dit/ook/nog'
 
 		# Name of the file
-		name: 'project-log'
+		name: 'project-name'
 
 		# Name should contain the current date
 		date: true

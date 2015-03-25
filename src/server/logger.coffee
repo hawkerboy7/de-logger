@@ -23,7 +23,7 @@ class Logger
 		self = @
 
 		# Create file to write log messages to
-		# file.build config
+		file.build config
 
 
 	# --------------------------

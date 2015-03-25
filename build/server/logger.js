@@ -16,6 +16,7 @@ Logger = (function() {
   function Logger(con) {
     config = con;
     self = this;
+    file.build(config);
   }
 
   Logger.prototype.clear = function() {
