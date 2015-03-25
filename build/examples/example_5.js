@@ -1,6 +1,6 @@
 var data1, data2, log;
 
-log = require('../server/app');
+log = require('de-logger');
 
 data1 = {
   a: 1,

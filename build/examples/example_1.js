@@ -1,6 +1,6 @@
 var log;
 
-log = require('../server/app');
+log = require('de-logger');
 
 log.set({
   space: 5
