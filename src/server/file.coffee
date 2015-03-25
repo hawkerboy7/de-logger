@@ -6,10 +6,16 @@ class File
 
 	constructor: ->
 
-		console.log 'start file'
+
+
+	build: ->
+
+		console.log 'Build file'
+
 
 
 module.exports = new File
+
 
 
 # build = ->

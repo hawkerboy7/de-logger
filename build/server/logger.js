@@ -1,10 +1,8 @@
-var Logger, _, config, fs, path, self, stream;
+var Logger, _, config, file, self, stream;
 
 _ = require('underscore');
 
-fs = require('fs');
-
-path = require('path');
+file = require('./file');
 
 self = null;
 
@@ -13,12 +11,12 @@ config = {};
 stream = null;
 
 Logger = (function() {
-  var build, check, getDate, getMs, getTime, lead, log, logFile, prep;
+  var check, getDate, getMs, getTime, lead, log, logFile, prep;
 
   function Logger(con) {
     config = con;
     self = this;
-    build();
+    file.build();
   }
 
   Logger.prototype.clear = function() {
@@ -180,21 +178,6 @@ Logger = (function() {
   };
 
   logFile = function(name, argumenten) {};
-
-  build = function() {
-    var dir, pointer;
-    if (!config.file) {
-      return;
-    }
-    pointer = '../../';
-    dir = path.resolve(__dirname, pointer + config.file.path);
-    return fs.mkdir(dir, function(e) {
-      if (e) {
-        return self.error('Build directory', e);
-      }
-      return self.info('Build directory', 'Was succefull', dir);
-    });
-  };
 
   return Logger;
 
