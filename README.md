@@ -28,7 +28,7 @@ log.error 'Error', 'commands'
 ## API
 
 ### set({config})
-Change the default configuration by providing a config object ([example 2](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)). This can be done at any time during you project and multiple times. This way data in your project can be logged differently at any point in your project.
+Change the default configuration by providing a config object ([example 2](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)). This can be done at any time during you project and multiple times (which is shown in [example 4](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)). This way data in your project can be logged differently at any point in your project.
 
 ```coffeescript
 # Default config
@@ -74,8 +74,10 @@ __terminal__ _true / false_
 Show messages in the terminal
 
 ___Do not show messages from a specific function___<br>
-You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code.
-```javascript
+You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code ([example 3](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)).
+```coffeescript
+log = require 'de-logger'
+
 log.set
   func:
     display: false
@@ -104,68 +106,65 @@ Show warnings
 ### error(*)
 Show errors
 
-* The arguments that should be provided are explained in [Usage](https://github.com/hawkerboy7/de-logger#usage).
+\* The arguments that should be provided are explained in [Usage](https://github.com/hawkerboy7/de-logger#usage).
 
 
 ## Usage
-\* It basically works the same way as console.log() only it ads colours and formatting to the messages. First agument should be the name of your choosing for the data you want to log. The rest of the arguments should be the data. You may also provide one argument containing data.
+It basically works the same way as console.log() only it ads colors and alignment to the messages. The first agument is assumed to be the name of the data you want to log. The rest of the arguments should be the data you want to log. You may also provide one argument containing data. This way the log will be nameless.
 
 
-## Big Example
-```javascript
-var data1, data2, log;
+## Example 4
+```coffeescript
+log = require 'de-logger'
 
-log = require('de-logger');
+# Set config to also whipe the history of the console
+log.set
+  whipe: true
 
-log.set({
-  "whipe": true
-});
+# Clear the console (and whipe it's history)
+log.clear()
 
-log.clear();
+# Set some data variables
+data1 = a: 1, b: 2, c: 3
+data2 = a: 4, b: 5, c: 6
 
-data1 = {
-  "a": 1,
-  "b": 2,
-  "c": 3
-};
+# Log a function and a debug message
+log.func 'First function'
+log.debug 'Debugging', 'Debug message', data1
 
-data2 = {
-  "a": 4,
-  "b": 5,
-  "c": 6
-};
+# (Re)set config
+log.set
 
-log.func('First function');
+  # Also show time
+  time: true
 
-log.debug('Debugging', 'Debug message', data1);
+  # Turn off func and debug messages
+  func:
+    display: false
+  debug:
+    display: false
 
-log.set({
-  "time": true,
-  "func": { "display": false },
-  "debug": { "display": false }
-});
+# Log a function, debug, info and event message
+log.func 'First function'                       # This will not be displayed due to the config on line 19
+log.debug 'Debugging', 'Debug message', data1   # This will not be displayed due to the config on line 19
+log.info 'Webserver', 'Running at port: 8000'
+log.event 'Gui input', data2
 
-log.func('Second function');
 
-log.debug('Debugging', 'Debug message 2', data1);
+# (Re)Set config
+log.set
 
-log.info('Webserver', 'Running at port: 8000');
+  # Also show date
+  date: true
 
-log.event('Gui input', data2);
-
-log.set({
-  "date": true,
-});
-
-log.warn('Usermodel', 'Cannot find a user id');
-
-log.error('Mongodb', 'Connection with mongodb couldn\'t be established');
+# Log a warning and an error
+log.warn 'Usermodel', 'Cannot find a user id'
+log.error 'Mongodb', 'Connection with mongodb couldn\'t be established'
 ```
-Big Output<br>
 ![second](https://cloud.githubusercontent.com/assets/2284480/6828406/f01f685c-d30d-11e4-9f12-9db3fa97743c.png)
 
 You can still provide your data as the only argument
-```javascript
+```coffeescript
 log.set({
   "date": true,
   "time": false

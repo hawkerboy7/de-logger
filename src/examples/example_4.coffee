@@ -1,28 +1,25 @@
 # log = require 'de-logger'
 log = require '../server/app'
 
-# Set config
+# Set config to also whipe the history of the console
 log.set
 	whipe: true
 
-# Clear the console
+# Clear the console (and whipe it's history)
 log.clear()
 
-data1 =
-	a: 1
-	b: 2
-	c: 3
+# Set some data variables
+data1 = a: 1, b: 2, c: 3
+data2 = a: 4, b: 5, c: 6
 
-data2 =
-	a: 4
-	b: 5
-	c: 6
-
+# Log a function and a debug message
 log.func 'First function'
 log.debug 'Debugging', 'Debug message', data1
 
-# (Re)Set config
+# (Re)set config
 log.set
+
+	# Also show time
 	time: true
 
 	# Turn off func and debug messages
@@ -31,34 +28,19 @@ log.set
 	debug:
 		display: false
 
-log.func 'First function'
-log.debug 'Debugging', 'Debug message', data1
+# Log a function, debug, info and event message
+log.func 'First function'							# This will not be displayed due to the config on line 19
+log.debug 'Debugging', 'Debug message', data1		# This will not be displayed due to the config on line 19
 log.info 'Webserver', 'Running at port: 8000'
 log.event 'Gui input', data2
 
 
-# (Re)Set config
+# (Re)set config
 log.set
+
+	# Also show date
 	date: true
 
-	# Turn off func and debug messages
-	func:
-		display: false
-	debug:
-		display: false
-
+# Log a warning and an error
 log.warn 'Usermodel', 'Cannot find a user id'
 log.error 'Mongodb', 'Connection with mongodb couldn\'t be established'
-
-# (Re)Set config
-log.set
-	time: false
-
-log.info(data1);
-
-# (Re)Set config
-log.set
-	time: true
-	ms: true
-
-log.event(data2);
