@@ -145,7 +145,7 @@ log.set
     display: false
 
 # Log a function, debug, info and event message
-log.func 'First function'             # This will not be displayed
+log.func 'First function'                       # This will not be displayed
 log.debug 'Debugging', 'Debug message', data1   # This will not be displayed
 log.info 'Webserver', 'Running at port: 8000'
 log.event 'Gui input', data2
