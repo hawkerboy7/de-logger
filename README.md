@@ -16,8 +16,8 @@ var log = require('de-logger');
 ### set({config})
 Change the default configuration by providing a config object. This can be done at any time during you project and multiple times. This way data in your project can be logged differently at any point in your project.
 
-##### Default Config
 ```javascript
+// default config
 config = {
   "ms":       false,
   "date":     false,
@@ -99,7 +99,7 @@ log.info('Name','Running at port:', port);
 ```
 Simple output
 ```
-info  Name → Running at port: 8000
+[green] info  Name → Running at port: 8000
 ```
 
 
@@ -155,12 +155,12 @@ log.error('Mongodb', 'Connection with mongodb couldn\'t be established');
 ```
 Big Output
 ```
-func  First function
-debug Debugging → Debug message { a: 1, b: 2, c: 3 }
-09:19:28  info  Webserver → Running at port: 8000
-09:19:28  event Gui input → { a: 4, b: 5, c: 6 }
-23-03-2015 09:19:28  warn  Usermodel → Cannot find a user id
-23-03-2015 09:19:28  error Mongodb → Connection with mongodb couldn't be established
+[magenta] func  First function
+[blue]    debug Debugging → Debug message { a: 1, b: 2, c: 3 }
+09:19:28 [green] info  Webserver → Running at port: 8000
+09:19:28 [cyan]  event Gui input → { a: 4, b: 5, c: 6 }
+23-03-2015 09:19:28 [yellow] warn  Usermodel → Cannot find a user id
+23-03-2015 09:19:28 [red]    error Mongodb   → Connection with mongodb couldn't be established
 ```
 You can still provide your data as the only argument
 ```javascript
