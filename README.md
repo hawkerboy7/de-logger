@@ -40,12 +40,12 @@ Show the current time
 __align__ _true / false_
 Will make sure the data logged after the name is in alignment with the largest name provided.
 ```javascript
-info  Name_short → First value          // space = 10
-info  Name_normal → Second value        // space = 11
-info  Name        → Third value         // space = 11
-info  Name_even_lager → Fourth value    // space = 15
-info  name_short      → Fifth value     // space = 15
-info  hi              → Sixth value     // space = 15
+[green] info  Name_short → First value          // space = 10
+[green] info  Name_normal → Second value        // space = 11
+[green] info  Name        → Third value         // space = 11
+[green] info  Name_even_lager → Fourth value    // space = 15
+[green] info  name_short      → Fifth value     // space = 15
+[green] info  hi              → Sixth value     // space = 15
 ```
 __space__ _int_
 The amount of characters the name area should contain. Default is 0 and grows whenever a name with a bigger length is provided (as is shown in the example above), but you can choose to start with another number.
@@ -180,8 +180,8 @@ log.event(data2);
 ```
 Output
 ```
-23-03-2015  info  { a: 1, b: 2, c: 3 }
-23-03-2015 09:20:47.91  event { a: 4, b: 5, c: 6 }
+23-03-2015 [green] info  { a: 1, b: 2, c: 3 }
+23-03-2015 09:20:47.91 [cyan] event { a: 4, b: 5, c: 6 }
 ```
 
 
