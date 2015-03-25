@@ -5,7 +5,7 @@ Logger = require('./logger');
 config = {
   terminal: true,
   file: {
-    path: 'logs/hallo/test/kan/dot/wel',
+    path: 'logs/lol',
     name: 'project-log',
     date: true
   },

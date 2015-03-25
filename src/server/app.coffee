@@ -17,7 +17,7 @@ config =
 	file :
 
 		# Path where the file needs to be stored
-		path: 'logs/hallo/test/kan/dot/wel'
+		path: 'logs/lol'
 
 		# Name of the file
 		name: 'project-log'

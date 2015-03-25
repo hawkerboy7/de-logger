@@ -1,18 +1,16 @@
-# --------------------------------------------------
-# NPM / Node modules
-# --------------------------------------------------
+# npm
 _		= require 'underscore'
+
+# own
 file	= require './file'
 
-# --------------------------------------------------
-# "Global" variables
-# --------------------------------------------------
+# "global" variables
 self = null
 config = {}
 stream = null
 
 # --------------------------------------------------
-# Logger Module
+#	Logger Module
 # --------------------------------------------------
 class Logger
 
@@ -25,7 +23,7 @@ class Logger
 		self = @
 
 		# Create file to write log messages to
-		file.build()
+		# file.build config
 
 
 	# --------------------------
@@ -65,6 +63,9 @@ class Logger
 
 	set: (settings) ->
 		_.extend config, settings
+
+		# Create file to write log messages to if user changes the file config
+		# file.build config if config.file # Ill check for support for this later...
 
 
 	# --------------------------
@@ -163,7 +164,7 @@ class Logger
 		console.log.apply null, result
 
 		# Add message to a log file
-		logFile name, argumenten if config.file
+		# file.log name, argumenten if config.made
 
 
 	getDate = ->

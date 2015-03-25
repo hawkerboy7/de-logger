@@ -1,16 +1,57 @@
+# npm
+_		= require 'underscore'
+
+# node
 fs		= require 'fs'
 path	= require 'path'
 
+# "global" variables
+self	= null
+file	= null
+config	= null
 
+
+# --------------------------------------------------
+#	File write Module
+# --------------------------------------------------
 class File
 
-	constructor: ->
+	build: (cfg) ->
+
+		# Make the config globally available
+		config = cfg
+
+		# Make a global reference to the File class
+		self = @
+
+		# Return if no config is found
+		return unless config.file
+
+		# Set starting path
+		# pointer = '../../../'
+		pointer = '../../'
+
+		# Create path of directory
+		dir = path.resolve __dirname, pointer+config.file.path
+
+		# Create directory
+		fs.mkdir dir, (e) ->
+
+			# Directory was made
+			return made = true unless e
+
+			# Directory already exists so it's made
+			return made = true if e.code is 'EEXIST'
+
+			# Log error
+			console.log e if e
 
 
+	# --------------------------
+	#	Private helper functions
+	# --------------------------
+	makeStream = ->
 
-	build: ->
-
-		console.log 'Build file'
 
 
 
@@ -18,30 +59,18 @@ module.exports = new File
 
 
 
-# build = ->
 
-# 	# Check if a config has been made for the file
-# 	return unless config.file
 
-# 	# Pointer which to ../../../ in production
-# 	# pointer = '../../../'
-# 	pointer = '../../'
 
-# 	# Create dir path if it doesn't exist
-# 	dir = path.resolve __dirname, pointer+config.file.path
 
-# 	fs.mkdir dir, (e) ->
 
-# 		return self.error 'Build directory', e if e
-
-# 		self.info 'Build directory', 'Was succefull', dir
 
 
 # 	# name = config.file.name
 
 # This file will be in node_modules of a project
 # Going up 3 directories should place your log in the root of the project
-# filePath =  dir +'/'+name
+#
 
 # console.log filePath
 
@@ -52,3 +81,40 @@ module.exports = new File
 
 # console.log stream
 # stream.once
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

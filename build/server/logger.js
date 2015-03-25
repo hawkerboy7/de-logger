@@ -16,7 +16,6 @@ Logger = (function() {
   function Logger(con) {
     config = con;
     self = this;
-    file.build();
   }
 
   Logger.prototype.clear = function() {
@@ -149,10 +148,7 @@ Logger = (function() {
       })(this));
     }
     result.push('\033[0m');
-    console.log.apply(null, result);
-    if (config.file) {
-      return logFile(name, argumenten);
-    }
+    return console.log.apply(null, result);
   };
 
   getDate = function() {
