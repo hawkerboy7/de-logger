@@ -98,9 +98,7 @@ var port = 8000;
 log.info('Name','Running at port:', port);
 ```
 Simple output
-```
-[green] info  Name → Running at port: 8000
-```
+![somewhere](https://cloud.githubusercontent.com/assets/2284480/6828387/cce1e6a8-d30d-11e4-931a-8c55717163b7.png)
 
 
 ## Big Example
@@ -137,9 +135,9 @@ log.set({
   "debug": { "display": false }
 });
 
-log.func('First function');
+log.func('Second function');
 
-log.debug('Debugging', 'Debug message', data1);
+log.debug('Debugging', 'Debug message 2', data1);
 
 log.info('Webserver', 'Running at port: 8000');
 
@@ -154,14 +152,8 @@ log.warn('Usermodel', 'Cannot find a user id');
 log.error('Mongodb', 'Connection with mongodb couldn\'t be established');
 ```
 Big Output
-```
-[magenta] func  First function
-[blue]    debug Debugging → Debug message { a: 1, b: 2, c: 3 }
-09:19:28 [green] info  Webserver → Running at port: 8000
-09:19:28 [cyan]  event Gui input → { a: 4, b: 5, c: 6 }
-23-03-2015 09:19:28 [yellow] warn  Usermodel → Cannot find a user id
-23-03-2015 09:19:28 [red]    error Mongodb   → Connection with mongodb couldn't be established
-```
+![second](https://cloud.githubusercontent.com/assets/2284480/6828406/f01f685c-d30d-11e4-9f12-9db3fa97743c.png)
+
 You can still provide your data as the only argument
 ```javascript
 log.set({
@@ -179,10 +171,8 @@ log.set({
 log.event(data2);
 ```
 Output
-```
-23-03-2015 [green] info  { a: 1, b: 2, c: 3 }
-23-03-2015 09:20:47.91 [cyan] event { a: 4, b: 5, c: 6 }
-```
+![third](https://cloud.githubusercontent.com/assets/2284480/6828421/0bf90394-d30e-11e4-9b39-62adfdb8bd74.png)
+
 
 
 ## Planned Features
