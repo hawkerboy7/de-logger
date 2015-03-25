@@ -6,7 +6,7 @@ file	= require './file'
 
 # "global" variables
 self = null
-config = {}
+config = null
 stream = null
 
 # --------------------------------------------------
