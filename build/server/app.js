@@ -6,8 +6,7 @@ config = {
   terminal: true,
   file: {
     path: 'logs',
-    name: 'project-name',
-    date: true
+    name: 'project-name'
   },
   date: false,
   time: false,
