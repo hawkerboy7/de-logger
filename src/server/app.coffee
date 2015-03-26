@@ -22,9 +22,6 @@ config =
 		# Name of the file
 		name: 'project-name'
 
-		# Name should contain the current date
-		date: true
-
 	# Show date
 	date		: false
 
