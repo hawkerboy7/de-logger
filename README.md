@@ -11,6 +11,9 @@ Require _de-logger_ in your project and you're ready to go!
 var log = require('de-logger');
 ```
 
+## Usage
+It basically works the same way as console.log() only it ads colors and alignment to the messages. The first agument is assumed to be the name of the data you want to log. The rest of the arguments should be the data you want to log. You may also provide one argument containing data. This way the log will be nameless.
+
 ## Example 1
 The examples are written in coffeescript. For an example in javascript check the [examples folder](https://github.com/hawkerboy7/de-logger/tree/master/build/examples).
 ```coffeescript
@@ -108,10 +111,6 @@ Show warnings
 Show errors
 
 \* The arguments that should be provided are explained in [Usage](https://github.com/hawkerboy7/de-logger#usage).
-
-
-## Usage
-It basically works the same way as console.log() only it ads colors and alignment to the messages. The first agument is assumed to be the name of the data you want to log. The rest of the arguments should be the data you want to log. You may also provide one argument containing data. This way the log will be nameless.
 
 
 ## Example 4

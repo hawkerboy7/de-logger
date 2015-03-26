@@ -1,15 +1,17 @@
-# --------------------------------------------------
-# NPM module
-# --------------------------------------------------
-_ = require 'underscore'
+# npm
+_		= require 'underscore'
+
+# own
+file	= require './file'
+time	= require './time'
+
+# "global" variables
+self = null
+config = null
+stream = null
 
 # --------------------------------------------------
-# "Global" variable
-# --------------------------------------------------
-config = {}
-
-# --------------------------------------------------
-# Logger Module
+#	Logger Module
 # --------------------------------------------------
 class Logger
 
@@ -17,6 +19,13 @@ class Logger
 
 		# Make the config available in this script
 		config = con
+
+		# Make reference to the this scope
+		self = @
+
+		# Create file to write log messages to
+		file.build config
+
 
 	# --------------------------
 	#	Public log functions
@@ -56,12 +65,19 @@ class Logger
 	set: (settings) ->
 		_.extend config, settings
 
+		# Create file to write log messages to if user changes the file config
+		# file.build config if config.file # Ill check for support for this later...
+
+
 	# --------------------------
 	#	Private helper functions
 	# --------------------------
 	check = (name) -> config.terminal and (config[name]?.display isnt false)
 
 	prep = (argumenten,color,functionName) ->
+
+		# Store the input
+		inputs = _.extend {}, argumenten
 
 		# Don't to anything if arguments are not provided
 		return unless argumenten[0]
@@ -78,18 +94,18 @@ class Logger
 
 		if config.date
 			set += 1
-			message += getDate()
+			message += time.getDate()
 
 		if config.time
 			if set
 				message += ' '
 
 			set += 2
-			message += getTime()
+			message += time.getTime()
 
 		if config.time and config.ms
 			set		+= 4
-			message	+= getMs()
+			message	+= time.getMs()
 
 		# End of time color
 		message += `'\033[0m'` if config.date or config.time
@@ -130,10 +146,10 @@ class Logger
 		message += ' → ' if name
 
 		# Head to log
-		log name, message, argumenten
+		log name,message,argumenten,inputs, functionName
 
 
-	log = (name,message,argumenten) ->
+	log = (name,message,argumenten,inputs,functionName) ->
 
 		result = []
 
@@ -152,46 +168,7 @@ class Logger
 		console.log.apply null, result
 
 		# Add message to a log file
-		logFile name, argumenten if config.file
-
-
-	getDate = ->
-
-		# Get DateTime
-		time = new Date
-
-		# Return date in nice format
-		return	lead(time.getDate())+'-'+
-				lead(time.getMonth()+1)+'-'+
-				time.getFullYear()
-
-
-	getTime = ->
-
-		# Get DateTime
-		time = new Date
-
-		# Return time in nice format
-		return	lead(time.getHours())+':'+
-				lead(time.getMinutes())+':'+
-				lead(time.getSeconds())
-
-
-	getMs = ->
-		# Get DateTime
-		time = new Date
-
-		# Return miliseconds in nice format
-		return	'.'+lead(time.getMilliseconds())
-
-
-	# Add a leading 0 to time
-	lead = (time) ->
-		('0'+time).slice(-2)
-
-
-	logFile = (name,argumenten) ->
-		console.log 'Cannot log to file yet. Wait for version 0.2.0'
+		file.log name, functionName, inputs unless file.disabled
 
 
 

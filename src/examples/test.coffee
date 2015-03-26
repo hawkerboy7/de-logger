@@ -1,9 +1,8 @@
 log = require '../server/app'
 
-log.info('name_smal', 'data');
-log.info('name_bigger', 'data');
-log.info('name', 'data');
-log.info('name_12', 'data');
-log.info('name_even_bigger', 'data');
-log.info('name_normal', 'data');
-log.info('name', 'data');
+# test2 = require './test2'
+
+log.info 'Information 1', 1
+log.info 'Information 2', [1, 2, 3]
+log.info 'Information 3', a:[1, 2, 3], b: '1', c: {d:1,e:'asd',f:['a', 'b']}
+log.info 'Information 4', 'asdf'

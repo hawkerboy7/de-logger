@@ -4,7 +4,11 @@ Logger = require('./logger');
 
 config = {
   terminal: true,
-  file: false,
+  file: {
+    path: 'logs',
+    name: 'project-name',
+    date: true
+  },
   date: false,
   time: false,
   ms: false,
