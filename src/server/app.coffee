@@ -13,14 +13,17 @@ config =
 	terminal	: true
 
 	# Store in file
-	# file : false
 	file :
+
+		# On or off
+		enabled	: false
 
 		# Path where the file needs to be stored
 		path: 'logs'
 
 		# Name of the file
 		name: 'project-name'
+
 
 	# Show date
 	date		: false
