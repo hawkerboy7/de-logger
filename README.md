@@ -31,7 +31,7 @@ log.error 'Error', 'commands'
 Change the default configuration by providing a config object ([example 2](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)). This can be done at any time during you project and multiple times (which is shown in [example 4](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)). This way data in your project can be logged differently at any point in your project.
 
 ```coffeescript
-# Default config
+# Example 2 - Default config
 log = require 'de-logger'
 
 config =
@@ -76,6 +76,7 @@ Show messages in the terminal
 ___Do not show messages from a specific function___<br>
 You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code ([example 3](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)).
 ```coffeescript
+# Example 3
 log = require 'de-logger'
 
 log.set
@@ -164,6 +165,7 @@ log.error 'Mongodb', 'Connection couldn\'t be established'
 
 You can still provide your data as the only argument
 ```coffeescript
+# Example 5
 log = require 'de-logger'
 
 data1 =
