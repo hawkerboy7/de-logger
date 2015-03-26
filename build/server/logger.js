@@ -13,12 +13,11 @@ config = null;
 stream = null;
 
 Logger = (function() {
-  var check, log, prep;
+  var check, deepMerge, log, prep;
 
   function Logger(con) {
     config = con;
     self = this;
-    file.build(config);
   }
 
   Logger.prototype.clear = function() {
@@ -72,7 +71,10 @@ Logger = (function() {
   };
 
   Logger.prototype.set = function(settings) {
-    return _.extend(config, settings);
+    deepMerge(config, settings);
+    if (config.file.enabled) {
+      return file.build(config);
+    }
   };
 
   check = function(name) {
@@ -153,9 +155,26 @@ Logger = (function() {
     }
     result.push('\033[0m');
     console.log.apply(null, result);
-    if (!file.disabled) {
+    if (!file.disabled && config.file.enabled) {
       return file.log(name, functionName, inputs);
     }
+  };
+
+  deepMerge = function(obj1, obj2) {
+    var e, p;
+    for (p in obj2) {
+      try {
+        if (typeof obj2[p] === 'object') {
+          obj1[p] = deepMerge(obj1[p], obj2[p]);
+        } else {
+          obj1[p] = obj2[p];
+        }
+      } catch (_error) {
+        e = _error;
+        obj1[p] = obj2[p];
+      }
+    }
+    return obj1;
   };
 
   return Logger;

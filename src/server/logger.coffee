@@ -23,9 +23,6 @@ class Logger
 		# Make reference to the this scope
 		self = @
 
-		# Create file to write log messages to
-		file.build config
-
 
 	# --------------------------
 	#	Public log functions
@@ -63,10 +60,10 @@ class Logger
 		prep arguments, '31m', 'error'
 
 	set: (settings) ->
-		_.extend config, settings
+		deepMerge config, settings
 
-		# Create file to write log messages to if user changes the file config
-		# file.build config if config.file # Ill check for support for this later...
+		# Create file to write log messages to
+		file.build config if config.file.enabled
 
 
 	# --------------------------
@@ -168,7 +165,21 @@ class Logger
 		console.log.apply null, result
 
 		# Add message to a log file
-		file.log name, functionName, inputs unless file.disabled
+		file.log name, functionName, inputs if !file.disabled and config.file.enabled
+
+
+	deepMerge = (obj1, obj2) ->
+
+		for p of obj2
+			try
+				if typeof obj2[p] is 'object'
+					obj1[p] = deepMerge obj1[p], obj2[p]
+				else
+					obj1[p] = obj2[p]
+			catch e
+				obj1[p] = obj2[p]
+
+		return obj1
 
 
 

@@ -1,6 +1,6 @@
 log = require '../server/app'
 
-# test2 = require './test2'
+
 
 log.info 'Information 1', 1
 log.info 'Information 2', [1, 2, 3]
