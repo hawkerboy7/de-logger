@@ -1,14 +1,19 @@
-var log, port;
+var log;
 
 log = require('../server/app');
 
-log.set({
-  date: true,
-  whipe: true
+log.info('Information 1', 1);
+
+log.info('Information 2', [1, 2, 3]);
+
+log.info('Information 3', {
+  a: [1, 2, 3],
+  b: '1',
+  c: {
+    d: 1,
+    e: 'asd',
+    f: ['a', 'b']
+  }
 });
 
-log.clear();
-
-port = 8000;
-
-log.info('Name', 'Running at port:', port);
+log.info('Information 4', 'asdf');

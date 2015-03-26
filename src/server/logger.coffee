@@ -3,6 +3,7 @@ _		= require 'underscore'
 
 # own
 file	= require './file'
+time	= require './time'
 
 # "global" variables
 self = null
@@ -75,6 +76,9 @@ class Logger
 
 	prep = (argumenten,color,functionName) ->
 
+		# Store the input
+		inputs = _.extend {}, argumenten
+
 		# Don't to anything if arguments are not provided
 		return unless argumenten[0]
 
@@ -90,18 +94,18 @@ class Logger
 
 		if config.date
 			set += 1
-			message += getDate()
+			message += time.getDate()
 
 		if config.time
 			if set
 				message += ' '
 
 			set += 2
-			message += getTime()
+			message += time.getTime()
 
 		if config.time and config.ms
 			set		+= 4
-			message	+= getMs()
+			message	+= time.getMs()
 
 		# End of time color
 		message += `'\033[0m'` if config.date or config.time
@@ -142,10 +146,10 @@ class Logger
 		message += ' → ' if name
 
 		# Head to log
-		log name, message, argumenten
+		log name,message,argumenten,inputs, functionName
 
 
-	log = (name,message,argumenten) ->
+	log = (name,message,argumenten,inputs,functionName) ->
 
 		result = []
 
@@ -164,42 +168,7 @@ class Logger
 		console.log.apply null, result
 
 		# Add message to a log file
-		file.log name, argumenten unless file.disabled
-
-
-	getDate = ->
-
-		# Get DateTime
-		time = new Date
-
-		# Return date in nice format
-		return	lead(time.getDate())+'-'+
-				lead(time.getMonth()+1)+'-'+
-				time.getFullYear()
-
-
-	getTime = ->
-
-		# Get DateTime
-		time = new Date
-
-		# Return time in nice format
-		return	lead(time.getHours())+':'+
-				lead(time.getMinutes())+':'+
-				lead(time.getSeconds())
-
-
-	getMs = ->
-		# Get DateTime
-		time = new Date
-
-		# Return miliseconds in nice format
-		return	'.'+lead(time.getMilliseconds())
-
-
-	# Add a leading 0 to time
-	lead = (time) ->
-		('0'+time).slice(-2)
+		file.log name, functionName, inputs unless file.disabled
 
 
 

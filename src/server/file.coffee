@@ -5,10 +5,14 @@ _		= require 'underscore'
 fs		= require 'fs'
 path	= require 'path'
 
+# own
+time	= require './time'
+
 # "global" variables
-self	= null
-file	= null
-config	= null
+config			= null
+stream			= null
+folderPath		= null
+messagesBuffer	= false
 
 
 # --------------------------------------------------
@@ -21,26 +25,44 @@ class File
 		# Make the config globally available
 		config = cfg
 
-		# Make a global reference to the File class
-		self = @
-
 		# Return if no config is found
 		return unless config.file
 
 		# Creates the folder in which to store log files
-		createFolder (status) ->
+		createFolder (e) ->
 
 			# Disable the log->file since the file path couldn't be made
-			return disabled = true if status
+			# Show error?
+			return disabled = true if e
 
 			# Create log write stream
-			createStream (res) ->
+			createStream (e) ->
 
-				console.log 'stream', res
+				# Disable the log->file since the file couldn't be made
+				return disabled = true if e
+
+				# Log al events stored in the buffer into the file
+				logMessagesBuffer()
+
 
 	log: ->
-		# console.log 'hoi'
 
+		unless stream
+
+			# Start the log message buffer
+			messagesBuffer = [] unless messagesBuffer
+
+			# Create txt message from arguments
+			message = handle arguments
+
+			# Store messages
+			messagesBuffer.push message
+
+		else
+			# Create txt message from arguments
+			message = handle arguments
+
+			writeMessage message
 
 
 	# --------------------------
@@ -49,8 +71,8 @@ class File
 	createFolder = (cb) ->
 
 		# Set starting path
-		# pointer = __dirname + '/../../..'
-		pointer = __dirname + '/../..'
+		pointer = __dirname + '/../../..'
+		# pointer = __dirname + '/../..'
 
 		# Folders / path to be created
 		folders = config.file.path.split "/"
@@ -80,12 +102,12 @@ class File
 			if e and e.code isnt 'EEXIST'
 
 				# Cannot make this folder / path
-				cb false
+				cb e
 
 			# Have all directories been made?
 			if (folders.length-1) is i
 
-				return cb true
+				return cb null
 
 			else
 				# Increase count
@@ -95,42 +117,62 @@ class File
 				makeNext folders, dirPath, i, cb
 
 
-	createStream = ->
+	createStream = (cb) ->
 
-		console.log 'createStream'
+		# Set the name to incluse the date, time, ms and file name
+		name = time.getDate(true)+' '+time.getTime()+time.getMs()+' '+config.file.name
 
+		# Make file path
+		filePath = folderPath+'/'+name+'.txt'
+
+		# Try to create the stream file
+		try
+			stream = fs.createWriteStream filePath
+		catch e
+			cb e
+
+		# Everything is ok
+		cb null
+
+
+	logMessagesBuffer = ->
+
+		_.each messagesBuffer, (message) ->
+
+			writeMessage message
+
+
+	handle = (argumenten) ->
+
+		name			= argumenten[0]
+		functionName	= argumenten[1]
+		args			= argumenten[2]
+
+		# Format message
+		message = time.getDate(true)+' '+time.getTime()+time.getMs()
+		message += '  '+functionName
+
+		if name
+			message += ' '+name+' →'
+
+		_.each args, (arg,i) ->
+
+			return if i is '0' if name
+
+			return message += ' '+JSON.stringify arg if typeof arg is 'object'
+
+			message += ' '+arg
+
+		message
+
+
+	writeMessage = (message) ->
+
+		stream.write message+'\n'
 
 
 
 module.exports = new File
-
-
-
-
-
-
-
-
-
-
-# 	# name = config.file.name
-
-# This file will be in node_modules of a project
-# Going up 3 directories should place your log in the root of the project
-#
-
-# console.log filePath
-
-# try
-# 	stream = fs.createWriteStream filePath
-# catch e
-# 	self.error 'Log file', 'Couldn\'t create a log file error: ', e
-
-# console.log stream
-# stream.once
-
-
-
 
 
 
