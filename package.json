@@ -15,5 +15,19 @@
   "bugs": {
     "url": "https://github.com/hawkerboy7/de-logger/issues",
     "email" : "dexter.esajas@gmail.com"
-  }
+  },
+  "keywords": [
+    "logger",
+    "de-logger",
+    "log",
+    "node.js",
+    "nodejs",
+    "console",
+    "color",
+    "colors",
+    "colour",
+    "colours",
+    "alignment",
+    "align"
+  ]
 }
