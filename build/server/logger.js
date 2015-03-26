@@ -1,14 +1,24 @@
-var Logger, _, config;
+var Logger, _, config, file, self, stream, time;
 
 _ = require('underscore');
 
-config = {};
+file = require('./file');
+
+time = require('./time');
+
+self = null;
+
+config = null;
+
+stream = null;
 
 Logger = (function() {
-  var check, getDate, getMs, getTime, lead, log, logFile, prep;
+  var check, log, prep;
 
   function Logger(con) {
     config = con;
+    self = this;
+    file.build(config);
   }
 
   Logger.prototype.clear = function() {
@@ -71,7 +81,8 @@ Logger = (function() {
   };
 
   prep = function(argumenten, color, functionName) {
-    var i, length, message, name, set;
+    var i, inputs, length, message, name, set;
+    inputs = _.extend({}, argumenten);
     if (!argumenten[0]) {
       return;
     }
@@ -86,18 +97,18 @@ Logger = (function() {
     }
     if (config.date) {
       set += 1;
-      message += getDate();
+      message += time.getDate();
     }
     if (config.time) {
       if (set) {
         message += ' ';
       }
       set += 2;
-      message += getTime();
+      message += time.getTime();
     }
     if (config.time && config.ms) {
       set += 4;
-      message += getMs();
+      message += time.getMs();
     }
     if (config.date || config.time) {
       message += '\033[0m';
@@ -123,10 +134,10 @@ Logger = (function() {
     if (name) {
       message += ' → ';
     }
-    return log(name, message, argumenten);
+    return log(name, message, argumenten, inputs, functionName);
   };
 
-  log = function(name, message, argumenten) {
+  log = function(name, message, argumenten, inputs, functionName) {
     var result;
     result = [];
     if (!name) {
@@ -142,35 +153,9 @@ Logger = (function() {
     }
     result.push('\033[0m');
     console.log.apply(null, result);
-    if (config.file) {
-      return logFile(name, argumenten);
+    if (!file.disabled) {
+      return file.log(name, functionName, inputs);
     }
-  };
-
-  getDate = function() {
-    var time;
-    time = new Date;
-    return lead(time.getDate()) + '-' + lead(time.getMonth() + 1) + '-' + time.getFullYear();
-  };
-
-  getTime = function() {
-    var time;
-    time = new Date;
-    return lead(time.getHours()) + ':' + lead(time.getMinutes()) + ':' + lead(time.getSeconds());
-  };
-
-  getMs = function() {
-    var time;
-    time = new Date;
-    return '.' + lead(time.getMilliseconds());
-  };
-
-  lead = function(time) {
-    return ('0' + time).slice(-2);
-  };
-
-  logFile = function(name, argumenten) {
-    return console.log('Cannot log to file yet. Wait for version 0.2.0');
   };
 
   return Logger;
