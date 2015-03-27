@@ -30,6 +30,29 @@ log.error 'Error', 'commands'
 
 ## API
 
+### clear()
+Clears the console. Based on your config your console scroll history will be wiped too.
+
+### func(*)
+Identifing which function is triggered. Only the function name is required but more arguments may be given.
+
+### debug(*)
+Display debug information
+
+### info(*)
+Display general information like which port your webserver is running on
+
+### event(*)
+Keep track of specific (socket) events.
+
+### warn(*)
+Show warnings
+
+### error(*)
+Show errors
+
+\* The arguments that should be provided are explained in [Usage](https://github.com/hawkerboy7/de-logger#usage).
+
 ### set({config})
 Change the default configuration by providing a config object ([example 2](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)). This can be done at any time during you project and multiple times (which is shown in [example 4](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)). This way data in your project can be logged differently at any point in your project.
 
@@ -113,30 +136,8 @@ log.set
     display: false
 ```
 
-### clear()
-Clears the console. Based on your config your console scroll history will be wiped too.
-
-### func(*)
-Identifing which function is triggered. Only the function name is required but more arguments may be given.
-
-### debug(*)
-Display debug information
-
-### info(*)
-Display general information like which port your webserver is running on
-
-### event(*)
-Keep track of specific (socket) events.
-
-### warn(*)
-Show warnings
-
-### error(*)
-Show errors
-
-\* The arguments that should be provided are explained in [Usage](https://github.com/hawkerboy7/de-logger#usage).
-
 ## Example 4
+This example shows you can easily switch your logging type during your project.
 ```coffeescript
 log = require 'de-logger'
 
@@ -185,31 +186,18 @@ log.error 'Mongodb', 'Connection couldn\'t be established'
 ```
 ![example 4](https://cloud.githubusercontent.com/assets/2284480/6836823/25cb4d30-d346-11e4-849b-497d6dc1948c.png)
 
+## Example 5
 You can still provide your data as the only argument
 ```coffeescript
-# Example 5
 log = require 'de-logger'
 
-data1 =
-  a: 1
-  b: 2
-  c: 3
-
-data2 =
-  a: 4
-  b: 5
-  c: 6
-
-log.info(data1);
+log.info a:1,b:2,c:3
 
 # (Re)Set config
-log.set
-  time: true
-  ms: true
+log.set time:true,ms:true
 
-log.event(data2);
+log.event a:4,b:5,c:6
 ```
-Output<br>
 ![example5](https://cloud.githubusercontent.com/assets/2284480/6837069/6c486368-d348-11e4-8ef2-82ac81920c5e.png)
 
 
