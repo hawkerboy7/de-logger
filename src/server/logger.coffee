@@ -69,7 +69,7 @@ class Logger
 	# --------------------------
 	#	Private helper functions
 	# --------------------------
-	check = (name) -> config.terminal and (config[name]?.display isnt false)
+	check = (name) -> (config.terminal or config.file.enabled) and (config[name]?.display isnt false)
 
 	prep = (argumenten,color,functionName) ->
 
