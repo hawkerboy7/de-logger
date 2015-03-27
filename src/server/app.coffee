@@ -24,7 +24,6 @@ config =
 		# Name of the file
 		name: 'project-name'
 
-
 	# Show date
 	date		: false
 

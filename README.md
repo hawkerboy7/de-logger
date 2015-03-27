@@ -12,7 +12,7 @@ var log = require('de-logger');
 ```
 
 ## Usage
-It basically works the same way as console.log() only it ads colors and alignment to the messages. The first agument is assumed to be the name of the data you want to log. The rest of the arguments should be the data you want to log. You may also provide one argument containing data. This way the log will be nameless.
+It basically works the same way as console.log() only it ads colors and alignment to the messages. The first agument is assumed to be the name of the data you want to log. The rest of the arguments should be the data you want to log. You may also provide one argument containing data. This way the log will be nameless. As of version 0.2.0 it's also possible to store log messages into a log file.
 
 ## Example 1
 The examples are written in coffeescript. For an example in javascript check the [examples folder](https://github.com/hawkerboy7/de-logger/tree/master/build/examples).
@@ -39,6 +39,10 @@ log = require 'de-logger'
 
 config =
   ms:       false
+  file:
+    enabled : false
+    path: 'logs'
+    name: 'project-name'
   date:     false
   time:     false
   align:    true
@@ -50,6 +54,26 @@ log.set config
 ```
 __ms__ _true / false_
 Add miliseconds to time (only works if time is true)
+
+__file__ _object_
+* __enabled__ _true / false_
+Turn logging messages to a file on or off.
+
+* __path__ _string_
+Directory path to store log files into. It will be relative from the root of your project.
+
+* __name__ _string_
+Name of the log file
+
+Example_1's output in a file
+```
+2015-03-27 01:05:57.20  func  Func → These
+2015-03-27 01:05:57.20  debug Debug → are
+2015-03-27 01:05:57.20  info  Info → all the
+2015-03-27 01:05:57.20  event Event → basic
+2015-03-27 01:05:57.20  warn  Warn → log
+2015-03-27 01:05:57.20  error Error → commands
+```
 
 __date__ _true / false_
 Show the current date
@@ -93,7 +117,7 @@ log.set
 Clears the console. Based on your config your console scroll history will be wiped too.
 
 ### func(*)
-Identifing which function is triggered (suppling the function name is still required for now)
+Identifing which function is triggered. Only the function name is required but more arguments may be given.
 
 ### debug(*)
 Display debug information
@@ -111,7 +135,6 @@ Show warnings
 Show errors
 
 \* The arguments that should be provided are explained in [Usage](https://github.com/hawkerboy7/de-logger#usage).
-
 
 ## Example 4
 ```coffeescript
@@ -192,10 +215,9 @@ Output<br>
 
 ## Planned Features
 
-### Save log messages to a log file
+### Log-to-file
+* Support align and space in the log file
+* Make the messagesBuffer a multi-object so it will support example 6 as if all commands where executed synchronously.
 
 ### Individual config
-Configure methodes individually (with regard to time, date and ms).
-
-### Change the func method
-~~Make method func self aware. So if it is possible let the func method figure out the name of the function it is in.~~ This doesn't appear to be possible (in .coffee) since it only uses anonymous functions.
+* Configure methodes individually (with regard to time, date, ms and file).

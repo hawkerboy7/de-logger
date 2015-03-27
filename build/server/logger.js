@@ -79,7 +79,7 @@ Logger = (function() {
 
   check = function(name) {
     var ref;
-    return config.terminal && (((ref = config[name]) != null ? ref.display : void 0) !== false);
+    return (config.terminal || config.file.enabled) && (((ref = config[name]) != null ? ref.display : void 0) !== false);
   };
 
   prep = function(argumenten, color, functionName) {
