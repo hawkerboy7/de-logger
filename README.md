@@ -37,19 +37,19 @@ Clears the console. Based on your config your console scroll history will be wip
 Identifing which function is triggered. Only the function name is required but more arguments may be given.
 
 ### debug(*)
-Display debug information
+Display debug information.
 
 ### info(*)
-Display general information like which port your webserver is running on
+Display general information like which port your webserver is running on.
 
 ### event(*)
 Keep track of specific (socket) events.
 
 ### warn(*)
-Show warnings
+Show warnings.
 
 ### error(*)
-Show errors
+Show errors.
 
 \* The arguments that should be provided are explained in [Usage](https://github.com/hawkerboy7/de-logger#usage).
 
@@ -76,7 +76,7 @@ config =
 log.set config
 ```
 __ms__ _true / false_
-Add miliseconds to time (only works if time is true)
+Add miliseconds to time (only works if time is true).
 
 __file__ _object_
 * __enabled__ _true / false_
@@ -86,7 +86,7 @@ Turn logging messages to a file on or off.
 Directory path to store log files into. It will be relative from the root of your project.
 
 * __name__ _string_
-Name of the log file
+Name of the log file.
 
 Example_1's output in a file
 ```
@@ -99,10 +99,10 @@ Example_1's output in a file
 ```
 
 __date__ _true / false_
-Show the current date
+Show the current date.
 
 __time__ _true / false_
-Show the current time
+Show the current time.
 
 __align__ _true / false_
 Will make sure the data logged after the name is in alignment with the largest name provided.
@@ -118,10 +118,10 @@ __space__ _int_
 The amount of characters the name area should contain. Default is 0 and grows whenever a name with a bigger length is provided (as is shown in the example above) but you can choose to start with another number.
 
 __whipe__ _true / false_
-This will also clear the console history
+This will also clear the console history.
 
 __terminal__ _true / false_
-Show messages in the terminal
+Show messages in the terminal.
 
 ___Do not show messages from a specific function___<br>
 You can also turn of a specific log function. Remember they will stay turned off untill you swich them on again somewhere in your code ([example 3](https://github.com/hawkerboy7/de-logger/tree/master/build/examples)).
@@ -187,7 +187,7 @@ log.error 'Mongodb', 'Connection couldn\'t be established'
 ![example 4](https://cloud.githubusercontent.com/assets/2284480/6836823/25cb4d30-d346-11e4-849b-497d6dc1948c.png)
 
 ## Example 5
-You can still provide your data as the only argument
+You can still provide your data as the only argument.
 ```coffeescript
 log = require 'de-logger'
 
@@ -204,7 +204,7 @@ log.event a:4,b:5,c:6
 ## Planned Features
 
 ### Log-to-file
-* Support align and space in the log file
+* Support align and space in the log file.
 * Make the messagesBuffer a multi-object so it will support example 6 as if all commands where executed synchronously.
 
 ### Individual config
