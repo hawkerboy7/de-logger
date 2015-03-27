@@ -1,7 +1,7 @@
 {
   "name": "de-logger",
-  "version": "0.2.0-1",
-  "description": "Log different types of events in the node.js console with different colors and alignment",
+  "version": "0.2.0-2",
+  "description": "Log functions, debug, info, events, warnings and errors in the node.js console (with colors and alignment) and / or in a file.",
   "main": "build/server/app.js",
   "author": "Dexter Esajas <dexter.esajas@gmail.com>",
   "license": "MIT",
@@ -20,6 +20,8 @@
     "logger",
     "log",
     "console",
+    "file",
+    "save",
     "node.js",
     "nodejs",
     "color",
