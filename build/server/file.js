@@ -56,7 +56,7 @@ File = (function() {
 
   createFolder = function(cb) {
     var dirPath, folders, i, pointer;
-    pointer = __dirname + '/../../../..';
+    pointer = __dirname + '/../..';
     folders = config.file.path.split("/");
     dirPath = pointer;
     i = 0;
@@ -99,14 +99,28 @@ File = (function() {
   };
 
   handle = function(argumenten) {
-    var args, functionName, message, name;
+    var args, functionName, i, length, message, name;
     name = argumenten[0];
     functionName = argumenten[1];
     args = argumenten[2];
     message = time.getDate(true) + ' ' + time.getTime() + time.getMs();
     message += '  ' + functionName;
     if (name) {
-      message += ' ' + name + ' →';
+      message += ' ' + name;
+    }
+    if (config.align) {
+      length = name.length;
+      if (length > config.space) {
+        config.space = length;
+      }
+      i = 0;
+      while (i < (config.space - length)) {
+        message += ' ';
+        i++;
+      }
+    }
+    if (name) {
+      message += ' →';
     }
     _.each(args, function(arg, i) {
       if (name) {
