@@ -153,7 +153,30 @@ class File
 		message += '  '+functionName
 
 		if name
-			message += ' '+name+' →'
+			message += ' '+name
+
+		if config.align
+
+			# Get string length
+			length = name.length
+
+			# Check if the string's length is bigger than prevous length
+			config.space = length if length > config.space
+
+			# Count
+			i=0
+
+			# Add spaces for the missing length of the string
+			while i < (config.space-length)
+
+				# Add space
+				message += ' '
+
+				# Incease count
+				i++
+
+		if name
+			message += ' →'
 
 		_.each args, (arg,i) ->
 
