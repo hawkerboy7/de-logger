@@ -92,9 +92,9 @@ Example_1's output in a file
 ```
 2015-03-27 01:05:57.20  func  Func → These
 2015-03-27 01:05:57.20  debug Debug → are
-2015-03-27 01:05:57.20  info  Info → all the
+2015-03-27 01:05:57.20  info  Info  → all the
 2015-03-27 01:05:57.20  event Event → basic
-2015-03-27 01:05:57.20  warn  Warn → log
+2015-03-27 01:05:57.20  warn  Warn  → log
 2015-03-27 01:05:57.20  error Error → commands
 ```
 
