@@ -1,6 +1,6 @@
 {
   "name": "de-logger",
-  "version": "0.2.1-2",
+  "version": "0.2.1-3",
   "description": "Log functions, debug, info, events, warnings and errors to the node.js console (with colors and alignment) and / or into a file.",
   "main": "build/server/app.js",
   "author": "Dexter Esajas <dexter.esajas@gmail.com>",
