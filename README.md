@@ -19,7 +19,7 @@ The examples are written in coffeescript. For an example in javascript check the
 ```coffeescript
 log = require 'de-logger'
 
-// Method  Name    Data
+#  Method  Name    Data
 log.func  'Func' , 'These'
 log.debug 'Debug', 'are'
 log.info  'Info' , 'all the'
