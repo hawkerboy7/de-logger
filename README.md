@@ -19,6 +19,7 @@ The examples are written in coffeescript. For an example in javascript check the
 ```coffeescript
 log = require 'de-logger'
 
+// Method  Name    Data
 log.func  'Func' , 'These'
 log.debug 'Debug', 'are'
 log.info  'Info' , 'all the'
@@ -204,7 +205,6 @@ log.event a:4,b:5,c:6
 ## Planned Features
 
 ### Log-to-file
-* Support align and space in the log file.
 * Make the messagesBuffer a multi-object so it will support example 6 as if all commands where executed synchronously.
 
 ### Individual config
