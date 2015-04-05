@@ -1,6 +1,6 @@
 {
   "name": "de-logger",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Log functions, debug, info, events, warnings and errors to the node.js console (with colors and alignment) and / or into a file.",
   "main": "build/server/app.js",
   "author": "Dexter Esajas <dexter.esajas@gmail.com>",
@@ -8,27 +8,21 @@
   "devDependencies": {
     "id-builder": "^1.6.0"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/hawkerboy7/de-logger"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hawkerboy7/de-logger"
   },
   "bugs": {
     "url": "https://github.com/hawkerboy7/de-logger/issues",
-    "email" : "dexter.esajas@gmail.com"
+    "email": "dexter.esajas@gmail.com"
   },
   "keywords": [
     "logger",
     "log",
     "console",
-    "file",
-    "save",
-    "node.js",
-    "nodejs",
-    "color",
-    "colors",
-    "colour",
-    "colours",
-    "alignment",
-    "align"
-  ]
+    "file"
+  ],
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
 }
