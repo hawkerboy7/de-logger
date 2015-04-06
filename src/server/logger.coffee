@@ -28,7 +28,7 @@ class Logger
 	#	Public log functions
 	# --------------------------
 	clear: ->
-		if config.clear
+		if config.whipe
 			# Clear and wipe history
 			console.log `'\033c'`
 		else

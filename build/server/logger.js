@@ -21,7 +21,7 @@ Logger = (function() {
   }
 
   Logger.prototype.clear = function() {
-    if (config.clear) {
+    if (config.whipe) {
       return console.log('\033c');
     } else {
       return console.log('\u001b[2J\u001b[0;0H');
