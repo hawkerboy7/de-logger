@@ -1,4 +1,7 @@
+[![Build Status](https://travis-ci.org/hawkerboy7/de-logger.svg?branch=master)](https://travis-ci.org/hawkerboy7/de-logger)
+
 # de-logger
+
 ## Getting Started
 
 Install de-logger using npm install
