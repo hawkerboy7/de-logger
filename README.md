@@ -2,6 +2,8 @@
 
 # de-logger
 
+[![Join the chat at https://gitter.im/hawkerboy7/de-logger](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hawkerboy7/de-logger?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Getting Started
 
 Install de-logger using npm install
