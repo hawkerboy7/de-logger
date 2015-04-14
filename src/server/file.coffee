@@ -71,7 +71,6 @@ class File
 	createFolder = (cb) ->
 
 		# Set starting path
-		# pointer = __dirname + '/../..'
 		pointer = __dirname + '/../../../..'
 
 		# Folders / path to be created
