@@ -1,5 +1,5 @@
-log = require 'de-logger'
-# log = require '../server/app'
+# log = require 'de-logger'
+log = require '../app'
 
 # Set config to also whipe the history of the console
 log.set
