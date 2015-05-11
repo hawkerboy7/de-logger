@@ -1,5 +1,5 @@
 log = require 'de-logger'
-# log = require '../server/app'
+# log = require '../app'
 
 config =
 	ms:			false

@@ -1,5 +1,5 @@
 log = require 'de-logger'
-# log = require '../server/app'
+# log = require '../app'
 
 data1 =
 	a: 1
@@ -11,11 +11,11 @@ data2 =
 	b: 5
 	c: 6
 
-log.info(data1);
+log.info data1
 
 # (Re)Set config
 log.set
 	time: true
 	ms: true
 
-log.event(data2);
+log.event data2
