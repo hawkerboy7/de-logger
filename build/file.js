@@ -57,7 +57,7 @@
 
     createFolder = function(cb) {
       var dirPath, folders, i, pointer;
-      pointer = __dirname + '/../../../..';
+      pointer = __dirname + '/../../..';
       folders = config.file.path.split("/");
       dirPath = pointer;
       i = 0;
