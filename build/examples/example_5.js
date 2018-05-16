@@ -1,27 +1,24 @@
-(function() {
-  var data1, data2, log;
+var data1, data2, log;
 
-  log = require('de-logger');
+log = require('de-logger');
 
-  data1 = {
-    a: 1,
-    b: 2,
-    c: 3
-  };
+data1 = {
+  a: 1,
+  b: 2,
+  c: 3
+};
 
-  data2 = {
-    a: 4,
-    b: 5,
-    c: 6
-  };
+data2 = {
+  a: 4,
+  b: 5,
+  c: 6
+};
 
-  log.info(data1);
+log.info(data1);
 
-  log.set({
-    time: true,
-    ms: true
-  });
+log.set({
+  time: true,
+  ms: true
+});
 
-  log.event(data2);
-
-}).call(this);
+log.event(data2);

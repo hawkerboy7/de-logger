@@ -1,22 +1,19 @@
-(function() {
-  var log;
+var log;
 
-  log = require('de-logger');
+log = require('de-logger');
 
-  log.set({
-    space: 5
-  });
+log.set({
+  space: 5
+});
 
-  log.func('Func', 'These');
+log.func('Func', 'These');
 
-  log.debug('Debug', 'are');
+log.debug('Debug', 'are');
 
-  log.info('Info', 'all the');
+log.info('Info', 'all the');
 
-  log.event('Event', 'basic');
+log.event('Event', 'basic');
 
-  log.warn('Warn', 'log');
+log.warn('Warn', 'log');
 
-  log.error('Error', 'commands');
-
-}).call(this);
+log.error('Error', 'commands');
