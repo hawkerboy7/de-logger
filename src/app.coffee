@@ -10,7 +10,7 @@ Logger = require './logger'
 config =
 
 	# Show in terminal
-	terminal	: true
+	terminal : true
 
 	# Store in file
 	file :
@@ -25,22 +25,22 @@ config =
 		name: 'project-name'
 
 	# Show date
-	date		: false
+	date : true
 
 	# Show time
-	time		: false
+	time : true
 
 	# Show ms
-	ms			: false
+	ms : false
 
 	# Whipe history
-	whipe		: false
+	whipe : false
 
 	# Align message after name
-	align		: true
+	align : true
 
 	# Spacing in alignment
-	space		: 0
+	space : 0
 
 
 module.exports = new Logger config
