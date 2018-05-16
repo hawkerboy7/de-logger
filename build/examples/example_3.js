@@ -1,15 +1,12 @@
-(function() {
-  var log;
+var log;
 
-  log = require('de-logger');
+log = require('de-logger');
 
-  log.set({
-    func: {
-      display: false
-    },
-    event: {
-      display: false
-    }
-  });
-
-}).call(this);
+log.set({
+  func: {
+    display: false
+  },
+  event: {
+    display: false
+  }
+});
