@@ -99,7 +99,7 @@ Logger = (function() {
     }
     if (config.date) {
       set += 1;
-      message += time.getDate();
+      message += time.getDate(true);
     }
     if (config.time) {
       if (set) {
